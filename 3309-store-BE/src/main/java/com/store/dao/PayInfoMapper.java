@@ -1,6 +1,6 @@
-package com.3309-store-BE.data-access-object;
+package com.store.dao;
 
-import com.3309-store-BE.pojo.PayInfo;
+import com.store.pojo.PayInfo;
 
 public interface PayInfoMapper {
     int deleteByPrimaryKey(Integer id);

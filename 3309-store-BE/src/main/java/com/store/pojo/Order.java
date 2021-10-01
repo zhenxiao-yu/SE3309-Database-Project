@@ -1,4 +1,4 @@
-package com.3309-store-BE.pojo;
+package com.store.pojo;
 
 import java.math.BigDecimal;
 import java.util.Date;

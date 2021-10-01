@@ -1,4 +1,4 @@
-package com.3309-store-BE.pojo;
+package com.store.pojo;
 
 import java.util.Date;
 
