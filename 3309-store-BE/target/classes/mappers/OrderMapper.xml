@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.3309-store-BE.dao.OrderMapper" >
-  <resultMap id="BaseResultMap" type="com.3309-store-BE.pojo.Order" >
+<mapper namespace="com.store.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.store.pojo.Order" >
     <constructor >
       <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="order_no" jdbcType="BIGINT" javaType="java.lang.Long" />
@@ -33,8 +33,8 @@
     delete from order
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.3309-store-BE.pojo.Order" >
-    insert into order (id, order_no, user_id, 
+  <insert id="insert" parameterType="com.store.pojo.Order" >
+    insert into order (id, order_no, user_id,
       shipping_id, payment, payment_type, 
       postage, status, payment_time, 
       send_time, end_time, close_time, 
@@ -43,9 +43,9 @@
       #{shippingId,jdbcType=INTEGER}, #{payment,jdbcType=DECIMAL}, #{paymentType,jdbcType=INTEGER}, 
       #{postage,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, 
       #{sendTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{closeTime,jdbcType=TIMESTAMP}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
-  <insert id="insertSelective" parameterType="com.3309-store-BE.pojo.Order" >
+  <insert id="insertSelective" parameterType="com.store.pojo.Order" >
     insert into order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -129,14 +129,14 @@
         #{closeTime,jdbcType=TIMESTAMP},
       </if>
       <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
       <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
+        now(),
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.3309-store-BE.pojo.Order" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.store.pojo.Order" >
     update order
     <set >
       <if test="orderNo != null" >
@@ -176,12 +176,12 @@
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = now(),
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.3309-store-BE.pojo.Order" >
+  <update id="updateByPrimaryKey" parameterType="com.store.pojo.Order" >
     update order
     set order_no = #{orderNo,jdbcType=BIGINT},
       user_id = #{userId,jdbcType=INTEGER},
@@ -195,7 +195,58 @@
       end_time = #{endTime,jdbcType=TIMESTAMP},
       close_time = #{closeTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+  <select id="selectByUserIdAndOrderNo" resultMap="BaseResultMap" parameterType="map">
+    SELECT
+    <include refid="Base_Column_List"></include>
+    from order
+    where order_no = #{orderNo}
+    and user_id = #{userId}
+  </select>
+
+
+  <select id="selectByOrderNo" resultMap="BaseResultMap" parameterType="long">
+    SELECT
+    <include refid="Base_Column_List">
+    </include>
+    FROM  order
+    where order_no = #{orderNo}
+  </select>
+
+
+
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="int">
+    SELECT
+      <include refid="Base_Column_List"/>
+    from order
+    where user_id = #{userId}
+    order by create_time desc
+  </select>
+
+
+
+  <select id="selectAllOrder" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from order
+    ORDER BY  create_time desc
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>
