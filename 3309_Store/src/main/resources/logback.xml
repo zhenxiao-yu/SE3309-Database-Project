@@ -10,11 +10,11 @@
         </filter>
     </appender>
 
-    <appender name="mmall" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<File>d:/mmalllog/e_store.log</File>-->
-        <File>/developer/apache-tomcat-7.0.73/logs/mmall.log</File>
+    <appender name="e_store" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<File>d:/e_storelog/e_store.log</File>-->
+        <File>/Program Files/Apache Software Foundation/Tomcat 10.0/logs/e_store.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>/developer/apache-tomcat-7.0.73/logs/mmall.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <fileNamePattern>/developer/apache-tomcat-7.0.73/logs/e_store.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -25,11 +25,10 @@
 
 
     <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!--<File>d:/mmalllog/error.log</File>-->
-        <File>/developer/apache-tomcat-7.0.73/logs/error.log</File>
+        <!--<File>d:/e_storelog/error.log</File>-->
+        <File>/Program Files/Apache Software Foundation/Tomcat 10.0/logs/error.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>/devsoft/apache-tomcat-7.0.73/logs/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>
-            <!--<fileNamePattern>d:/mmalllog/error.log.%d{yyyy-MM-dd}.gz</fileNamePattern>-->
             <append>true</append>
             <maxHistory>10</maxHistory>
         </rollingPolicy>
@@ -44,31 +43,12 @@
     </appender>
 
     <logger name="com.e_store" additivity="false" level="INFO" >
-        <appender-ref ref="mmall" />
+        <appender-ref ref="e_store" />
         <appender-ref ref="console"/>
     </logger>
 
 
-
-    <!-- geelynote mybatis log 日志 -->
-
     <logger name="com.e_store.dao" level="DEBUG"/>
-
-    <!--<logger name="com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate" level="DEBUG" >-->
-        <!--<appender-ref ref="console"/>-->
-    <!--</logger>-->
-
-    <!--<logger name="java.sql.Connection" level="DEBUG">-->
-        <!--<appender-ref ref="console"/>-->
-    <!--</logger>-->
-    <!--<logger name="java.sql.Statement" level="DEBUG">-->
-        <!--<appender-ref ref="console"/>-->
-    <!--</logger>-->
-
-    <!--<logger name="java.sql.PreparedStatement" level="DEBUG">-->
-        <!--<appender-ref ref="console"/>-->
-    <!--</logger>-->
-
 
     <root level="DEBUG">
         <appender-ref ref="console"/>
