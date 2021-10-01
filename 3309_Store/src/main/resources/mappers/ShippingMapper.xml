@@ -29,16 +29,16 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from mmall_shipping
+    from shipping_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from mmall_shipping
+    delete from shipping_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
 <<<<<<< HEAD:3309_Store/src/main/resources/mappers/ShippingMapper.xml
   <insert id="insert" parameterType="com.e_store.pojo.Shipping" useGeneratedKeys="true" keyProperty="id">
-    insert into mmall_shipping (id, user_id, receiver_name, 
+    insert into shipping_info (id, user_id, receiver_name,
 =======
   <insert id="insert" parameterType="com.3309-store-BE.pojo.Shipping" >
     insert into shipping_info (id, user_id, receiver_name, 
@@ -55,7 +55,7 @@
   </insert>
 <<<<<<< HEAD:3309_Store/src/main/resources/mappers/ShippingMapper.xml
   <insert id="insertSelective" parameterType="com.e_store.pojo.Shipping" >
-    insert into mmall_shipping
+    insert into shipping_info
 =======
   <insert id="insertSelective" parameterType="com.3309-store-BE.pojo.Shipping" >
     insert into shipping_info
@@ -139,7 +139,7 @@
   </insert>
 <<<<<<< HEAD:3309_Store/src/main/resources/mappers/ShippingMapper.xml
   <update id="updateByPrimaryKeySelective" parameterType="com.e_store.pojo.Shipping" >
-    update mmall_shipping
+    update shipping_info
 =======
   <update id="updateByPrimaryKeySelective" parameterType="com.3309-store-BE.pojo.Shipping" >
     update shipping_info
@@ -183,7 +183,7 @@
   </update>
 <<<<<<< HEAD:3309_Store/src/main/resources/mappers/ShippingMapper.xml
   <update id="updateByPrimaryKey" parameterType="com.e_store.pojo.Shipping" >
-    update mmall_shipping
+    update shipping_info
 =======
   <update id="updateByPrimaryKey" parameterType="com.3309-store-BE.pojo.Shipping" >
     update shipping_info
@@ -204,13 +204,13 @@
   </update>
 
   <delete id="deleteByShippingIdUserId" parameterType="map">
-    DELETE  FROM  mmall_shipping
+    DELETE  FROM  shipping_info
     where id = #{shippingId}
     and user_id = #{userId}
   </delete>
 
   <update id="updateByShipping" parameterType="com.e_store.pojo.Shipping">
-    update mmall_shipping
+    update shipping_info
     set
       receiver_name = #{receiverName,jdbcType=VARCHAR},
       receiver_phone = #{receiverPhone,jdbcType=VARCHAR},
@@ -233,7 +233,7 @@
   <select id="selectByShippingIdUserId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
-    from mmall_shipping
+    from shipping_info
     where id = #{shippingId}
     and user_id = #{userId}
   </select>
@@ -242,27 +242,9 @@
   <select id="selectByUserId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
-    from mmall_shipping
+    from shipping_info
     where user_id = #{userId}
   </select>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 =======

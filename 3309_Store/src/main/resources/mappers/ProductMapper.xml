@@ -24,15 +24,15 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from mmall_product
+    from product
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from mmall_product
+    delete from product
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.e_store.pojo.Product" >
-    insert into mmall_product (id, category_id, name, 
+    insert into product (id, category_id, name,
       subtitle, main_image, sub_images, 
       detail, price, stock, 
       status, create_time, update_time
@@ -44,7 +44,7 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.e_store.pojo.Product" >
-    insert into mmall_product
+    insert into product
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -123,7 +123,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.e_store.pojo.Product" >
-    update mmall_product
+    update product
     <set >
       <if test="categoryId != null" >
         category_id = #{categoryId,jdbcType=INTEGER},
@@ -162,7 +162,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.e_store.pojo.Product" >
-    update mmall_product
+    update product
     set category_id = #{categoryId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       subtitle = #{subtitle,jdbcType=VARCHAR},
@@ -181,7 +181,7 @@
   <select id="selectList" resultMap="BaseResultMap" >
     SELECT
     <include refid="Base_Column_List"/>
-    from mmall_product
+    from product
     ORDER BY id asc
   </select>
 
@@ -189,7 +189,7 @@
   <select id="selectByNameAndProductId" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"/>
-    from mmall_product
+    from product
     <where>
       <if test="productName != null">
         and name like #{productName}
@@ -203,7 +203,7 @@
   <select id="selectByNameAndCategoryIds" resultMap="BaseResultMap" parameterType="map">
     SELECT
     <include refid="Base_Column_List"></include>
-    from mmall_product
+    from product
     where status = 1
     <if test="productName != null">
       and name like #{productName}

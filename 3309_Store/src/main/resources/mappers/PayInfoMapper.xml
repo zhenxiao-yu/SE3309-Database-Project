@@ -25,16 +25,16 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from mmall_pay_info
+    from payment_info
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from mmall_pay_info
+    delete from payment_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
 <<<<<<< HEAD:3309_Store/src/main/resources/mappers/PayInfoMapper.xml
   <insert id="insert" parameterType="com.e_store.pojo.PayInfo" >
-    insert into mmall_pay_info (id, user_id, order_no, 
+    insert into payment_info (id, user_id, order_no,
 =======
   <insert id="insert" parameterType="com.3309-store-BE.pojo.PayInfo" >
     insert into payment_info (id, user_id, order_no, 
@@ -47,7 +47,7 @@
   </insert>
 <<<<<<< HEAD:3309_Store/src/main/resources/mappers/PayInfoMapper.xml
   <insert id="insertSelective" parameterType="com.e_store.pojo.PayInfo" >
-    insert into mmall_pay_info
+    insert into payment_info
 =======
   <insert id="insertSelective" parameterType="com.3309-store-BE.pojo.PayInfo" >
     insert into payment_info
@@ -107,7 +107,7 @@
   </insert>
 <<<<<<< HEAD:3309_Store/src/main/resources/mappers/PayInfoMapper.xml
   <update id="updateByPrimaryKeySelective" parameterType="com.e_store.pojo.PayInfo" >
-    update mmall_pay_info
+    update payment_info
 =======
   <update id="updateByPrimaryKeySelective" parameterType="com.3309-store-BE.pojo.PayInfo" >
     update payment_info
@@ -139,7 +139,7 @@
   </update>
 <<<<<<< HEAD:3309_Store/src/main/resources/mappers/PayInfoMapper.xml
   <update id="updateByPrimaryKey" parameterType="com.e_store.pojo.PayInfo" >
-    update mmall_pay_info
+    update payment_info
 =======
   <update id="updateByPrimaryKey" parameterType="com.3309-store-BE.pojo.PayInfo" >
     update payment_info
