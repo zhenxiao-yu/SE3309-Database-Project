@@ -48,9 +48,9 @@
         <!-- connection overtime, set to 30 minutes。 -->
         <property name="minEvictableIdleTimeMillis" value="${db.minEvictableIdleTimeMillis}"/>
 
-        <!--# time between < sql default-->
+        <!--# 失效检查线程运行时间间隔，要小于MySQL默认-->
         <property name="timeBetweenEvictionRunsMillis" value="40000"/>
-        <!-- test for valid connection-->
+        <!--# 检查连接是否有效-->
         <property name="testWhileIdle" value="true"/>
         <!--check validated sql statements-->
         <property name="validationQuery" value="SELECT 1 FROM dual"/>
@@ -76,10 +76,10 @@
     </bean>
 
     <bean name="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.store.dao"/>
+        <property name="basePackage" value="com.mmall.dao"/>
     </bean>
 
-    <!-- required for using @Transactional annotation-->
+    <!-- 使用@Transactional进行声明式事务管理需要声明下面这行 -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
     <!-- transaction manager -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
