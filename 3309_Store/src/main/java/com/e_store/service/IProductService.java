@@ -5,9 +5,7 @@ import com.e_store.common.ServerResponse;
 import com.e_store.pojo.Product;
 import com.e_store.vo.ProductDetailVo;
 
-/**
- * Created by geely
- */
+//Product Service Interface
 public interface IProductService {
 
     ServerResponse saveOrUpdateProduct(Product product);

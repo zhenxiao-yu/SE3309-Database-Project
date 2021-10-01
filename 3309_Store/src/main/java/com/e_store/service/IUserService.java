@@ -3,9 +3,7 @@ package com.e_store.service;
 import com.e_store.common.ServerResponse;
 import com.e_store.pojo.User;
 
-/**
- * Created by geely
- */
+//User Service Interface
 public interface IUserService {
 
     ServerResponse<User> login(String username, String password);

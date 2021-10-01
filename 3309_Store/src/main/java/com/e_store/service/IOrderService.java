@@ -6,7 +6,7 @@ import com.e_store.vo.OrderVo;
 
 import java.util.Map;
 
-
+//Order Service Interface
 public interface IOrderService {
     ServerResponse pay(Long orderNo, Integer userId, String path);
     ServerResponse aliCallback(Map<String,String> params);
@@ -17,9 +17,7 @@ public interface IOrderService {
     ServerResponse<OrderVo> getOrderDetail(Integer userId, Long orderNo);
     ServerResponse<PageInfo> getOrderList(Integer userId, int pageNum, int pageSize);
 
-
-
-    //backend
+    //seller only
     ServerResponse<PageInfo> manageList(int pageNum,int pageSize);
     ServerResponse<OrderVo> manageDetail(Long orderNo);
     ServerResponse<PageInfo> manageSearch(Long orderNo,int pageNum,int pageSize);
