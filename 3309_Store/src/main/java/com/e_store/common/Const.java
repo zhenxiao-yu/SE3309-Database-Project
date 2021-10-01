@@ -47,14 +47,14 @@ public class Const {
         }
     }
 
-
+    //Order Status Enumerator
     public enum OrderStatusEnum{
-        CANCELED(0,"已取消"),
-        NO_PAY(10,"未支付"),
-        PAID(20,"已付款"),
-        SHIPPED(40,"已发货"),
-        ORDER_SUCCESS(50,"订单完成"),
-        ORDER_CLOSE(60,"订单关闭");
+        CANCELED(0,"Order Canceled"),
+        NO_PAY(10,"Unpaid"),
+        PAID(20,"Paid"),
+        SHIPPED(40,"Shipped"),
+        ORDER_SUCCESS(50,"Order Complete"),
+        ORDER_CLOSE(60,"Order Closed");
 
 
         OrderStatusEnum(int code,String value){
@@ -92,7 +92,7 @@ public class Const {
 
 
     public enum PayPlatformEnum{
-        ALIPAY(1,"支付宝");
+        ALIPAY(1,"Alipay");
 
         PayPlatformEnum(int code,String value){
             this.code = code;
@@ -111,7 +111,7 @@ public class Const {
     }
 
     public enum PaymentTypeEnum{
-        ONLINE_PAY(1,"在线支付");
+        ONLINE_PAY(1,"Pay Online");
 
         PaymentTypeEnum(int code,String value){
             this.code = code;
@@ -135,12 +135,9 @@ public class Const {
                     return paymentTypeEnum;
                 }
             }
-            throw new RuntimeException("么有找到对应的枚举");
+            throw new RuntimeException("Enumerated Type Not Found");
         }
 
     }
-
-
-
 
 }
