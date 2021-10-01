@@ -5,11 +5,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.io.Serializable;
 
-/**
- * Created by geely
- */
 @JsonSerialize(include =  JsonSerialize.Inclusion.NON_NULL)
-//保证序列化json的时候,如果是null的对象,key也会消失
+//if target is null when serializing JSON, remove key
 public class ServerResponse<T> implements Serializable {
 
     private int status;
@@ -36,7 +33,7 @@ public class ServerResponse<T> implements Serializable {
     }
 
     @JsonIgnore
-    //使之不在json序列化结果当中
+    //remove from serialized JSON result
     public boolean isSuccess(){
         return this.status == ResponseCode.SUCCESS.getCode();
     }
@@ -50,7 +47,6 @@ public class ServerResponse<T> implements Serializable {
     public String getMsg(){
         return msg;
     }
-
 
     public static <T> ServerResponse<T> createBySuccess(){
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode());
@@ -68,7 +64,6 @@ public class ServerResponse<T> implements Serializable {
         return new ServerResponse<T>(ResponseCode.SUCCESS.getCode(),msg,data);
     }
 
-
     public static <T> ServerResponse<T> createByError(){
         return new ServerResponse<T>(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());
     }
@@ -81,17 +76,4 @@ public class ServerResponse<T> implements Serializable {
     public static <T> ServerResponse<T> createByErrorCodeMessage(int errorCode,String errorMessage){
         return new ServerResponse<T>(errorCode,errorMessage);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

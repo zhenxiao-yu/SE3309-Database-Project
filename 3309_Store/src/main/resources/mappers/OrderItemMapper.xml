@@ -17,31 +17,31 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, order_no, product_id, product_name, product_image, current_unit_price, quantity, 
+    id, order_no, product_id, product_name, product_image, current_unit_price, quantity,
     total_price, create_time, update_time, user_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
-    from mmall_order_item
+    from order_item
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from mmall_order_item
+    delete from order_item
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.e_store.pojo.OrderItem" >
-    insert into mmall_order_item (id, order_no, product_id, 
-      product_name, product_image, current_unit_price, 
-      quantity, total_price, create_time, 
+    insert into order_item (id, order_no, product_id,
+      product_name, product_image, current_unit_price,
+      quantity, total_price, create_time,
       update_time, user_id)
-    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{productId,jdbcType=INTEGER}, 
-      #{productName,jdbcType=VARCHAR}, #{productImage,jdbcType=VARCHAR}, #{currentUnitPrice,jdbcType=DECIMAL}, 
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{productId,jdbcType=INTEGER},
+      #{productName,jdbcType=VARCHAR}, #{productImage,jdbcType=VARCHAR}, #{currentUnitPrice,jdbcType=DECIMAL},
       #{quantity,jdbcType=INTEGER}, #{totalPrice,jdbcType=DECIMAL}, now(),
       now(), #{userId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.e_store.pojo.OrderItem" >
-    insert into mmall_order_item
+    insert into order_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -114,7 +114,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.e_store.pojo.OrderItem" >
-    update mmall_order_item
+    update order_item
     <set >
       <if test="orderNo != null" >
         order_no = #{orderNo,jdbcType=BIGINT},
@@ -150,7 +150,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.e_store.pojo.OrderItem" >
-    update mmall_order_item
+    update order_item
     set order_no = #{orderNo,jdbcType=BIGINT},
       product_id = #{productId,jdbcType=INTEGER},
       product_name = #{productName,jdbcType=VARCHAR},
@@ -168,7 +168,7 @@
   <select id="getByOrderNoUserId" parameterType="map" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-    from mmall_order_item
+    from order_item
     where order_no = #{orderNo}
     and user_id = #{userId}
   </select>
@@ -176,14 +176,14 @@
   <select id="getByOrderNo" parameterType="map" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
-    from mmall_order_item
+    from order_item
     where order_no = #{orderNo}
   </select>
 
 
 
   <insert id="batchInsert" parameterType="list">
-    insert into mmall_order_item (id, order_no,user_id, product_id,
+    insert into order_item (id, order_no,user_id, product_id,
       product_name, product_image, current_unit_price,
       quantity, total_price, create_time,
       update_time)
@@ -194,24 +194,6 @@
       )
     </foreach>
   </insert>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

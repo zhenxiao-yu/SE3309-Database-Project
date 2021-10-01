@@ -1,8 +1,5 @@
 package com.e_store.common;
 
-/**
- * Created by geely
- */
 public enum ResponseCode {
 
     SUCCESS(0,"SUCCESS"),
