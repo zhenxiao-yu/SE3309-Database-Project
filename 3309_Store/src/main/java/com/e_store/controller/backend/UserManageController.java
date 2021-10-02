@@ -26,11 +26,11 @@ public class UserManageController {
         if(response.isSuccess()){
             User user = response.getData();
             if(user.getRole() == Const.Role.ROLE_ADMIN){
-                //说明登录的是管理员
+                //indicated a seller login
                 session.setAttribute(Const.CURRENT_USER,user);
                 return response;
             }else{
-                return ServerResponse.createByErrorMessage("不是管理员,无法登录");
+                return ServerResponse.createByErrorMessage("Not a Seller, cannot login");
             }
         }
         return response;

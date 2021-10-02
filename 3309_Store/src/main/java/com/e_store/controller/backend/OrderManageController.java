@@ -32,14 +32,14 @@ public class OrderManageController {
 
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"Please login as Seller");
 
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
-            //填充我们增加产品的业务逻辑
+
             return iOrderService.manageList(pageNum,pageSize);
         }else{
-            return ServerResponse.createByErrorMessage("无权限操作");
+            return ServerResponse.createByErrorMessage("Access Denied");
         }
     }
 
@@ -49,15 +49,15 @@ public class OrderManageController {
 
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"Please login as Seller");
 
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
-            //填充我们增加产品的业务逻辑
+
 
             return iOrderService.manageDetail(orderNo);
         }else{
-            return ServerResponse.createByErrorMessage("无权限操作");
+            return ServerResponse.createByErrorMessage("Access Denied");
         }
     }
 
@@ -69,14 +69,14 @@ public class OrderManageController {
                                                @RequestParam(value = "pageSize",defaultValue = "10")int pageSize){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"Please login as Seller");
 
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充我们增加产品的业务逻辑
             return iOrderService.manageSearch(orderNo,pageNum,pageSize);
         }else{
-            return ServerResponse.createByErrorMessage("无权限操作");
+            return ServerResponse.createByErrorMessage("Access Denied");
         }
     }
 
@@ -88,14 +88,14 @@ public class OrderManageController {
 
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"Please login as Seller");
 
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
             //填充我们增加产品的业务逻辑
             return iOrderService.manageSendGoods(orderNo);
         }else{
-            return ServerResponse.createByErrorMessage("无权限操作");
+            return ServerResponse.createByErrorMessage("Access Denied");
         }
     }
 
