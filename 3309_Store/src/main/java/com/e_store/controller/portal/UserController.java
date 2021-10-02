@@ -18,13 +18,11 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/user/")
 public class UserController {
 
-
     @Autowired
     private IUserService iUserService;
 
-
     /**
-     * user download
+     * user login
      * @param username
      * @param password
      * @param session
@@ -68,7 +66,7 @@ public class UserController {
         if(user != null){
             return ServerResponse.createBySuccess(user);
         }
-        return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户的信息");
+        return ServerResponse.createByErrorMessage("User not logged in, cannot access current user information");
     }
 
 
@@ -99,7 +97,7 @@ public class UserController {
     public ServerResponse<String> resetPassword(HttpSession session,String passwordOld,String passwordNew){
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
-            return ServerResponse.createByErrorMessage("用户未登录");
+            return ServerResponse.createByErrorMessage("User not logged in");
         }
         return iUserService.resetPassword(passwordOld,passwordNew,user);
     }
@@ -110,7 +108,7 @@ public class UserController {
     public ServerResponse<User> update_information(HttpSession session,User user){
         User currentUser = (User)session.getAttribute(Const.CURRENT_USER);
         if(currentUser == null){
-            return ServerResponse.createByErrorMessage("用户未登录");
+            return ServerResponse.createByErrorMessage("User not logged in");
         }
         user.setId(currentUser.getId());
         user.setUsername(currentUser.getUsername());
@@ -127,7 +125,7 @@ public class UserController {
     public ServerResponse<User> get_information(HttpSession session){
         User currentUser = (User)session.getAttribute(Const.CURRENT_USER);
         if(currentUser == null){
-            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"未登录,需要强制登录status=10");
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"Not logged in, force login required (status=10)");
         }
         return iUserService.getInformation(currentUser.getId());
     }

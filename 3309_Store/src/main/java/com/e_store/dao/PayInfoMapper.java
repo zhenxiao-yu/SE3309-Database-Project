@@ -3,6 +3,7 @@ package com.e_store.dao;
 import com.e_store.pojo.PayInfo;
 
 public interface PayInfoMapper {
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(PayInfo record);
