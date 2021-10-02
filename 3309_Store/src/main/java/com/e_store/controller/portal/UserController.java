@@ -11,12 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import jakarta.servlet.http.HttpSession;
 
-import javax.servlet.http.HttpSession;
 
-/**
- * Created by geely
- */
 @Controller
 @RequestMapping("/user/")
 public class UserController {
@@ -27,7 +24,7 @@ public class UserController {
 
 
     /**
-     * 用户登录
+     * user download
      * @param username
      * @param password
      * @param session

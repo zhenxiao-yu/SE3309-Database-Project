@@ -11,18 +11,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
-/**
- * Created by geely
- */
+
 @Controller
 @RequestMapping("/cart/")
 public class CartController {
 
     @Autowired
     private ICartService iCartService;
-
 
 
     @RequestMapping("list.do")
@@ -121,19 +118,5 @@ public class CartController {
         }
         return iCartService.getCartProductCount(user.getId());
     }
-
-
-
-
-    //全选
-    //全反选
-
-    //单独选
-    //单独反选
-
-    //查询当前用户的购物车里面的产品数量,如果一个产品有10个,那么数量就是10.
-
-
-
 
 }

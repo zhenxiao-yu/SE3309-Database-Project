@@ -4,14 +4,12 @@ import com.e_store.common.Const;
 import com.e_store.common.ServerResponse;
 import com.e_store.pojo.User;
 import com.e_store.service.IUserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpSession;
-
 
 
 @Controller
