@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by geely
- */
+
 public class ProductServiceTest extends TestBase {
 
     @Autowired

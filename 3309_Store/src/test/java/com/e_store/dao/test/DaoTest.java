@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.sql.Timestamp;
 import java.util.Date;
 
-/**
- * Created by geely on e_store.
- */
+
 public class DaoTest extends TestBase {
 
     @Autowired

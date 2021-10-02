@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-/**
- * Created by geely
- */
+
 public class ShippingServiceTest extends TestBase {
 
     private Logger logger = LoggerFactory.getLogger(ShippingServiceTest.class);

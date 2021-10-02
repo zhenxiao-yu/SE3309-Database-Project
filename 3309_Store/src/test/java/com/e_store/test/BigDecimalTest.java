@@ -4,12 +4,6 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
-/**
- * Created by geely
- */
-
-
-
 
 public class BigDecimalTest {
 
@@ -20,11 +14,6 @@ public class BigDecimalTest {
         System.out.println(4.015*100);
         System.out.println(123.3/100);
     }
-
-
-
-
-
 
 
     @Test
