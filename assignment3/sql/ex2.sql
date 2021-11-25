@@ -31,7 +31,7 @@ price DECIMAL(10, 2) NOT NULL
 	CHECK (price >= 0),
 stock INT NOT NULL DEFAULT 0
 	CHECK (stock >= 0),
-prodStatus VARCHAR(32) NOT NULL DEFAULT 'Normal'
+prodStatus VARCHAR(32) NOT NULL DEFAULT 'Out of Stock'
 	CHECK (prodStatus IN ('Normal', 'On Sale', 'Out of Stock')),
 viewCount INT NOT NULL DEFAULT 0
 	CHECK (viewCount > 0),
