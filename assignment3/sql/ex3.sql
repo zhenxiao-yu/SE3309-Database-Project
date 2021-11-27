@@ -17,6 +17,7 @@ WHERE EXISTS   (SELECT *
 SELECT * FROM TargetedAdvertisement;
 
 -- 2
+DELETE FROM  OrderItem WHERE orderID = 1;
 
 -- turn cart into an order (assuming order 1 was just creating (realisticlaly we'd create before inserting))
 INSERT INTO OrderItem (orderID, prodID, purchaseAmount)
@@ -29,11 +30,11 @@ WHERE ci.userID IN (SELECT o.userID
 ;
 
 -- run these two commands to view the inserted things
-DELETE FROM  OrderItem WHERE orderID = 1;
 SELECT * FROM  OrderItem WHERE orderID = 1;
 
 
 -- 3
+DELETE FROM WishlistItem WHERE userID = 1;
 
 -- insert every product under a certain category into a wishlist
 INSERT INTO WishlistItem(userID, prodID)
@@ -42,5 +43,5 @@ FROM Product p
 WHERE p.category = 'Category 0';
 
 -- run these two commands to view inserted things
-DELETE FROM WishlistItem WHERE userID = 1;
 SELECT * FROM WishlistItem WHERE userID = 1;
+
