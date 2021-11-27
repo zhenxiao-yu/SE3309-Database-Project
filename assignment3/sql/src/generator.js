@@ -357,15 +357,16 @@ async function addOrderItems(start, end) {
 
 // Runs the functions 
 // Can enter an arbitrary value for starting and ending value 
-setTimeout(() => addAccounts(0, 100), 0)
+setTimeout(() => addAccounts(0, 200), 0)
 setTimeout(() => addCategory(0, 500), 500)
-setTimeout(() => addProduct(0, 100), 1000)
-setTimeout(() => addCartItem(1, 200), 1500)
-setTimeout(() => addComment(1, 200), 2000)
-setTimeout(() => addOrderStatus(1, 200), 2500)
-setTimeout(() => addPaymentInfo(1, 200), 3000)
-setTimeout(() => UserLocation(1, 200), 3500)
-setTimeout(() => addWishListItem(1, 200), 4000)
-setTimeout(() => addShippingInfos(1, 200), 4500)
-setTimeout(() => addOrders(1, 200), 10000)
-setTimeout(() => addOrderItems(1, 200), 10500)
+setTimeout(() => addProduct(0, 2000), 1000)
+setTimeout(() => addCartItem(1, 400), 1500)
+setTimeout(() => addComment(1, 4000), 2000)
+setTimeout(() => addOrderStatus(1, 1000), 2500)
+setTimeout(() => addPaymentInfo(1, 1000), 3000)
+setTimeout(() => UserLocation(1, 1000), 3500)
+setTimeout(() => addWishListItem(1, 4000), 4000)
+setTimeout(() => addShippingInfos(1, 1000), 4500)
+setTimeout(() => addOrders(1, 1000), 10000)
+setTimeout(() => addOrderItems(1, 1000), 14000)
+
