@@ -37,7 +37,6 @@ FROM Product p
 WHERE p.category = 'Category 1'
 ORDER BY Difference DESC;
 
-SELECT a.username
-FROM AllAccount a, TargetedAdvertisement t
-WHERE a.id = t.userID AND t.amountToShow = 10;
-
+SELECT prodName
+FROM Product
+WHERE prodStatus = "normal" AND price = (SELECT MAX(price) FROM Product);
