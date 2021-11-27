@@ -31,10 +31,10 @@ price DECIMAL(10, 2) NOT NULL
 	CHECK (price >= 0),
 stock INT NOT NULL DEFAULT 0
 	CHECK (stock >= 0),
-prodStatus VARCHAR(32) NOT NULL DEFAULT 'Out of Stock'
+prodStatus VARCHAR(32) NOT NULL DEFAULT 'Normal'
 	CHECK (prodStatus IN ('Normal', 'On Sale', 'Out of Stock')),
 viewCount INT NOT NULL DEFAULT 0
-	CHECK (viewCount > 0),
+	CHECK (viewCount >= 0),
 category VARCHAR(32) NOT NULL,
 PRIMARY KEY (id),
 UNIQUE (prodName, sellerID),
@@ -61,8 +61,7 @@ FOREIGN KEY (prodID) REFERENCES Product(id)
 
 CREATE TABLE UserLocation(
 recipientAddress VARCHAR(64) NOT NULL,
-recipientZIP CHAR(5) NOT NULL
-	CHECK (recipientZIP LIKE '[0-9][0-9][0-9][0-9][0-9]'),
+recipientZIP CHAR(5) NOT NULL,
 PRIMARY KEY (recipientAddress) 
 );
 
