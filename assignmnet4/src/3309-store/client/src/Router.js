@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import App from "components/App";
-import Login from "components/Login";
-import InvalidPath from "components/InvalidPath";
+import App from "views/App";
+import Login from "views/Login";
+import InvalidPath from "views/InvalidPath";
 
 //router component for switching pages
 const Router = () => (
