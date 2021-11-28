@@ -14,6 +14,14 @@ const db = mysql.createConnection({
     database: '' 
 });
 
+//connect
+db.connect((err) => {
+    if(err){
+        throw err;
+    }
+    console.log('MySQL connection established');
+});
+
 const port = 3001; //port number
 const server = `http://localhost:${port}`;
 app.listen(port, ()=> console.log(`Server started. Running at: ${server}`));

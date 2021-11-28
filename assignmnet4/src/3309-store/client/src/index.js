@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import "./css/style.scss";
 import "./css/store.scss";
 
-import Login from './components/Login'
+import App from './components/App'
 
 
-ReactDOM.render(<Login/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
