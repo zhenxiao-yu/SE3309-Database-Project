@@ -1,11 +1,13 @@
 //entry point js
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Router from 'Router'
+
 //css files
 import "css/style.scss";
 import "css/store.scss";
 
-import App from 'components/App'
 
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+
+ReactDOM.render(<Router/>, document.getElementById('root'));
