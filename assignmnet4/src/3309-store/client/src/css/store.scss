@@ -1,5 +1,26 @@
+
 @charset 'utf-8';
 
-.login-container {
-    background: lightgreen;
-}
+// Import Google Font
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+// Import font awesome
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css');
+
+// set color variables
+$purple: #632EA7;
+$pink:  #DE1B55;
+$dark: rgb(37, 37, 37);
+$light:rgb(248,248,248);
+
+// update global variables
+$family-sans-serif: 'Montserrat', sans-serif;
+$primary: $purple;
+$link: $dark;
+$danger: $pink;
+
+//update component variables
+$body-background-color: $light;
+
+//import bulma css framework
+@import '../../node_modules/bulma/bulma.sass';

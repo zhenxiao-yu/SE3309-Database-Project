@@ -1,0 +1,12 @@
+//login
+.login-container {
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+    .login-window {
+      width: 420px;
+      padding: 2rem;
+    }
+  }

@@ -1,29 +1,32 @@
 import React from "react";
-import '../css/store.scss';
+
 //login component
 class Login extends React.Component {
   render() {
     return (
-      <form className="login-container">
-        {/* Username input field */}
-        <div>
-          <label>Username</label>
-          <div>
-            <input type="text" placeholder="Username" />
+      <div className="login-container">
+        <form className="box login-window">
+          <h4 className="title is-4">Please Login First.</h4>
+          {/* Username input field */}
+          <div className="field">
+            <label className="label">Username</label>
+            <div className="control">
+              <input type="text" className="input" placeholder="Username" />
+            </div>
           </div>
-        </div>
-        {/* Password input field */}
-        <div>
-          <label>Password</label>
-          <div>
-            <input type="text" placeholder="Password" />
+          {/* Password input field */}
+          <div className="field">
+            <label className="label">Password</label>
+            <div className="control">
+              <input type="password" className="input" placeholder="Password" />
+            </div>
           </div>
-        </div>
-        {/* Submit Button */}
-        <div>
-          <button>Submit</button>
-        </div>
-      </form>
+          {/* Submit Button */}
+          <div className="control">
+            <button className="button is-primary is-fullwidth">Submit</button>
+          </div>
+        </form>
+      </div>
     );
   }
 }
