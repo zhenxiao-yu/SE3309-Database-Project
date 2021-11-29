@@ -8,6 +8,4 @@ import "css/style.scss";
 import "css/store.scss";
 
 
-
-
 ReactDOM.render(<Router/>, document.getElementById('root'));
