@@ -2,6 +2,7 @@ import React from "react";
 import ProductListHeader from "components/ProductListHeader";
 import ProductItem from "components/ProductItem";
 import CategoryList from "components/CategoryList";
+import axios from "axios";
 
 //ProductList component
 class ProductList extends React.Component {
@@ -71,6 +72,11 @@ class ProductList extends React.Component {
       image: "https://www.lifewire.com/thmb/DCaO15XgBiFhHSIFHhliAoIit08=/fit-in/1000x800/filters:no_upscale():max_bytes(150000):strip_icc()/JBL-Flip-5-8eb0f0a2abb24d7f9c40e2ccbbea89c9.jpg",
     }
   ];
+
+  //fetch data from server
+  componentDidMount() {
+
+  }
 
   render() {
     return (
