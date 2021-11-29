@@ -13,10 +13,10 @@ class ProductListHeader extends React.Component {
             <div className="control">
               <input type="text" className="input search-bar" placeholder="Search"/>
             </div>
-            {/* clear button */}
+            {/* search button */}
             <div className="control">
               <button className="button">
-                <i className="fa fa-cancel"></i>
+                <i className="fa fa-search"></i>
               </button>
             </div>
           </div>
