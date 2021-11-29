@@ -10,7 +10,7 @@ class ProductList extends React.Component {
     products: [],
   };
 
-  //test (need data from backend)
+  //test (need to parse data from backend)
   products = [
     {
       prodName: "Nintendo Switch",
@@ -36,7 +36,7 @@ class ProductList extends React.Component {
       prodName: "Iphone 11",
       price: "1300",
       stock: "32",
-      prodStatus: "Normal",
+      prodStatus: "Sale",
       viewCount: "7232",
       category: "Electronics",
       image:
@@ -56,7 +56,7 @@ class ProductList extends React.Component {
       prodName: "Corner study desk",
       price: "562",
       stock: "673",
-      prodStatus: "Normal",
+      prodStatus: "Sale",
       viewCount: "316",
       category: "Furniture",
       image: "https://m.media-amazon.com/images/I/61DDJad6SUL._AC_SL1500_.jpg",
@@ -65,7 +65,7 @@ class ProductList extends React.Component {
       prodName: "JBL speaker",
       price: "130",
       stock: "0",
-      prodStatus: "Out Of Stock",
+      prodStatus: "Unavailable",
       viewCount: "3213",
       category: "Electronics",
       image: "https://www.lifewire.com/thmb/DCaO15XgBiFhHSIFHhliAoIit08=/fit-in/1000x800/filters:no_upscale():max_bytes(150000):strip_icc()/JBL-Flip-5-8eb0f0a2abb24d7f9c40e2ccbbea89c9.jpg",
