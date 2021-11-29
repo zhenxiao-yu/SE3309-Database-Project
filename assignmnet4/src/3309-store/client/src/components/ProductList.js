@@ -10,7 +10,7 @@ class ProductList extends React.Component {
     products: [],
   };
 
-  //test
+  //test (need data from backend)
   products = [
     {
       prodName: "Nintendo Switch",
@@ -38,7 +38,7 @@ class ProductList extends React.Component {
       stock: "32",
       prodStatus: "Normal",
       viewCount: "7232",
-      category: "Mobile",
+      category: "Electronics",
       image:
         "http://cdn.mos.cms.futurecdn.net/ZeSeBrAF8CTw3ztqvYj24S.jpg",
     },
@@ -61,6 +61,15 @@ class ProductList extends React.Component {
       category: "Furniture",
       image: "https://m.media-amazon.com/images/I/61DDJad6SUL._AC_SL1500_.jpg",
     },
+    {
+      prodName: "JBL speaker",
+      price: "130",
+      stock: "0",
+      prodStatus: "Out Of Stock",
+      viewCount: "3213",
+      category: "Electronics",
+      image: "https://www.lifewire.com/thmb/DCaO15XgBiFhHSIFHhliAoIit08=/fit-in/1000x800/filters:no_upscale():max_bytes(150000):strip_icc()/JBL-Flip-5-8eb0f0a2abb24d7f9c40e2ccbbea89c9.jpg",
+    }
   ];
 
   render() {
