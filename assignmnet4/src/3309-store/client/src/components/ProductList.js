@@ -75,7 +75,11 @@ class ProductList extends React.Component {
 
   //fetch data from server
   componentDidMount() {
-
+    axios.get('http://localhost:3001/products').then(response => {
+      this.setState({
+        products: response.data
+      });
+    });
   }
 
   render() {
@@ -87,6 +91,8 @@ class ProductList extends React.Component {
           {/* each line has 12 slots */}
           <div className="columns is-multiline is-desktop">
             {/* iterate through all products */}
+
+            {/* !!!!!! use this.state.products.map when database is configured !!!!!*/}
             {this.products.map((product) => {
               return (
                 // each column is 3 slots, thus 4 products per line

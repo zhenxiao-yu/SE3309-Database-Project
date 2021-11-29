@@ -28,7 +28,7 @@ const Header = (props) => {
           ) : (
             <React.Fragment>
               {/* redirect to login page */}
-              <a href="/">Login</a>
+              <a href="/login">Login</a>
               {/* redirect to Register page */}
               <a href="/">Register</a>
             </React.Fragment>
