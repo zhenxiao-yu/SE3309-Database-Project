@@ -3,10 +3,14 @@ import React from "react";
 //login component
 class Login extends React.Component {
 
-  handleLogin = event => {
+
+  //login click event
+  handleLogin = (event) => {
     //prevent default action
     event.preventDefault();
+
     //get form data from input fields
+    
     
     //login logic (verify with server)
 
@@ -23,14 +27,14 @@ class Login extends React.Component {
           <div className="field">
             <label className="label">Username</label>
             <div className="control">
-              <input type="text" className="input" placeholder="Username" />
+              <input type="text" className="input" placeholder="Username" name="username"/>
             </div>
           </div>
           {/* Password input field */}
           <div className="field">
             <label className="label">Password</label>
             <div className="control">
-              <input type="password" className="input" placeholder="Password" />
+              <input type="password" className="input" placeholder="Password" name="password"/>
             </div>
           </div>
           {/* Submit Button */}
