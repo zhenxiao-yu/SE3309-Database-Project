@@ -1,3 +1,13 @@
+# To Start working the project:
+
+1. open 3309-store folder in vscode (or other IDE)
+2. open a terminal
+3. type cd client
+4. type yarn start or npm start
+5. open another terminal
+6. type cd server
+7. type nodemon
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
