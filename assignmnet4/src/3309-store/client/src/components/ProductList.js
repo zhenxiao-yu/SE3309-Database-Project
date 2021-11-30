@@ -2,13 +2,16 @@ import React from "react";
 import ProductListHeader from "components/ProductListHeader";
 import ProductItem from "components/ProductItem";
 import CategoryList from "components/CategoryList";
-import axios from "axios";
+import axios from "utils/axios";
 
 //ProductList component
 class ProductList extends React.Component {
   //product list state
   state = {
+    // stores the current search results
     products: [],
+    // stores the entire product list from database
+    originalProducts: [],
   };
 
   //test (need to parse data from backend)
@@ -40,8 +43,7 @@ class ProductList extends React.Component {
       prodStatus: "Sale",
       viewCount: "7232",
       category: "Electronics",
-      image:
-        "http://cdn.mos.cms.futurecdn.net/ZeSeBrAF8CTw3ztqvYj24S.jpg",
+      image: "http://cdn.mos.cms.futurecdn.net/ZeSeBrAF8CTw3ztqvYj24S.jpg",
     },
     {
       prodName: "T-shirt",
@@ -69,23 +71,42 @@ class ProductList extends React.Component {
       prodStatus: "Unavailable",
       viewCount: "3213",
       category: "Electronics",
-      image: "https://www.lifewire.com/thmb/DCaO15XgBiFhHSIFHhliAoIit08=/fit-in/1000x800/filters:no_upscale():max_bytes(150000):strip_icc()/JBL-Flip-5-8eb0f0a2abb24d7f9c40e2ccbbea89c9.jpg",
-    }
+      image:
+        "https://www.lifewire.com/thmb/DCaO15XgBiFhHSIFHhliAoIit08=/fit-in/1000x800/filters:no_upscale():max_bytes(150000):strip_icc()/JBL-Flip-5-8eb0f0a2abb24d7f9c40e2ccbbea89c9.jpg",
+    },
   ];
 
   //fetch data from server
   componentDidMount() {
-    axios.get('http://localhost:3001/products').then(response => {
+    axios.get("/products").then((response) => {
       this.setState({
-        products: response.data
+        products: response.data,
+        originalProducts: response.data,
       });
     });
   }
 
+  //search for a product
+  search = (searchText) => {
+    //get new product list array
+    let search_products = [...this.state.originalProducts];
+    //filter new array
+    search_products.filter((product) => {
+      // not case sensitive, search by product name
+      const result = product.prodName.match(new RegExp(searchText, "gi"));
+      return !!result;
+    });
+    //set state of product
+    this.setState({
+      products: search_products,
+    });
+  };
+
   render() {
     return (
       <div>
-        <ProductListHeader />
+        {/* pass search function to productList Header (contains search button) */}
+        <ProductListHeader search={this.search} />
         <CategoryList />
         <div className="products-container">
           {/* each line has 12 slots */}
@@ -101,7 +122,6 @@ class ProductList extends React.Component {
                 </div>
               );
             })}
-
           </div>
         </div>
       </div>
