@@ -8,9 +8,9 @@ class ProductItem extends React.Component {
 
     //change class based on product status
     const productClass = {
-        Normal: 'item-container',
-        Unavailable: 'item-container out-of-stock',
-        Sale: 'item-container on-sale'
+        normal: 'item-container',
+        unavailable: 'item-container out-of-stock',
+        sale: 'item-container on-sale'
     }
 
     return (

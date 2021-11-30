@@ -3,6 +3,7 @@ import ProductListHeader from "components/ProductListHeader";
 import ProductItem from "components/ProductItem";
 import CategoryList from "components/CategoryList";
 import axios from "utils/axios";
+import PopupEditor from "./PopupEditor";
 
 //ProductList component
 class ProductList extends React.Component {
@@ -20,7 +21,7 @@ class ProductList extends React.Component {
       prodName: "Nintendo Switch",
       price: "321",
       stock: "221",
-      prodStatus: "Normal",
+      prodStatus: "normal",
       viewCount: "3231",
       category: "Electronics",
       image:
@@ -30,7 +31,7 @@ class ProductList extends React.Component {
       prodName: "RadMission 1",
       price: "1532",
       stock: "921",
-      prodStatus: "Normal",
+      prodStatus: "normal",
       viewCount: "4212",
       category: "Sports Equipment",
       image:
@@ -40,7 +41,7 @@ class ProductList extends React.Component {
       prodName: "Iphone 11",
       price: "1300",
       stock: "32",
-      prodStatus: "Sale",
+      prodStatus: "sale",
       viewCount: "7232",
       category: "Electronics",
       image: "http://cdn.mos.cms.futurecdn.net/ZeSeBrAF8CTw3ztqvYj24S.jpg",
@@ -49,7 +50,7 @@ class ProductList extends React.Component {
       prodName: "T-shirt",
       price: "23",
       stock: "3222",
-      prodStatus: "Normal",
+      prodStatus: "normal",
       viewCount: "543",
       category: "Clothing",
       image:
@@ -59,7 +60,7 @@ class ProductList extends React.Component {
       prodName: "Corner study desk",
       price: "562",
       stock: "673",
-      prodStatus: "Sale",
+      prodStatus: "sale",
       viewCount: "316",
       category: "Furniture",
       image: "https://m.media-amazon.com/images/I/61DDJad6SUL._AC_SL1500_.jpg",
@@ -68,7 +69,7 @@ class ProductList extends React.Component {
       prodName: "JBL speaker",
       price: "130",
       stock: "0",
-      prodStatus: "Unavailable",
+      prodStatus: "unavailable",
       viewCount: "3213",
       category: "Electronics",
       image:
@@ -102,13 +103,21 @@ class ProductList extends React.Component {
     });
   };
 
+  addProduct = () => {
+    PopupEditor.showPopup()
+  }
+
   render() {
     return (
       <div>
         {/* pass search function to productList Header (contains search button) */}
         <ProductListHeader search={this.search} />
         <CategoryList />
+        
         <div className="products-container">
+          <button className="button is-danger popup-btn" onClick={this.addProduct}>
+            + Add Product +
+          </button>
           {/* each line has 12 slots */}
           <div className="columns is-multiline is-desktop">
             {/* iterate through all products */}
@@ -123,6 +132,7 @@ class ProductList extends React.Component {
               );
             })}
           </div>
+          
         </div>
       </div>
     );
