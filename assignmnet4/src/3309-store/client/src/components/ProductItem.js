@@ -2,7 +2,7 @@ import React from "react";
 
 class ProductItem extends React.Component {
   render() {
-    //   destructure props
+    //   destruct props
     const { prodName, price, stock, prodStatus, viewCount, category, image } =
       this.props.product;
 

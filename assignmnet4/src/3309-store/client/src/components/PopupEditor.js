@@ -6,19 +6,30 @@ class PopupEditor extends React.Component {
   state = {
     //deactivated by default
     on: false,
+    //initial state doesn't carry child component
+    component: null,
+    callBackFunc: ()=> {},
   };
 
   //hidePopup method
-  hidePopup = () => {
+  hidePopup = (data) => {
     this.setState({
       on: false,
     });
+    this.state.callBackFunc(data);
   };
 
   //showPopup method
-  showPopup = () => {
+  showPopup = (options) => {
+    //define key as current time, so that key changes every time popup opens
+    const popupKey = new Date().getTime()
+    const { component, callBackFunc } = options;
+    // create child as react element amd pass on parent hide method
+    const newComponent = React.createElement(component, { key: popupKey, hidePopup: this.hidePopup});
     this.setState({
       on: true,
+      component: newComponent,
+      callBackFunc: callBackFunc
     });
   };
 
@@ -39,7 +50,7 @@ class PopupEditor extends React.Component {
             <span className="close-btn" onClick={this.hidePopup}>
               x
             </span>
-            <p className="has-text-centered">Children component</p>
+            {this.state.component}
           </div>
         </div>
       </div>

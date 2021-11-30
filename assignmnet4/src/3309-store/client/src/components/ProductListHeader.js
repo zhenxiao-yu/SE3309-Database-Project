@@ -11,20 +11,16 @@ class ProductListHeader extends React.Component {
     this.setState({
       searchValue: text,
     });
-    this.props.search(text)
+    this.props.search(text);
   };
 
-  //Clear text 
+  //Clear text
   handleClear = () => {
     this.setState({
       searchValue: "",
     });
-    this.props.search('')
+    this.props.search("");
   };
-
-
-
-
 
   render() {
     return (
@@ -46,7 +42,11 @@ class ProductListHeader extends React.Component {
             </div>
             {/* clear button */}
             <div className="control">
-              <button className="button" title="Clear" onClick={this.handleClear}> 
+              <button
+                className="button"
+                title="Clear"
+                onClick={this.handleClear}
+              >
                 <i className="fa fa-eraser"></i>
               </button>
             </div>

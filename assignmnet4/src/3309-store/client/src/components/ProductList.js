@@ -3,7 +3,8 @@ import ProductListHeader from "components/ProductListHeader";
 import ProductItem from "components/ProductItem";
 import CategoryList from "components/CategoryList";
 import axios from "utils/axios";
-import PopupEditor from "./PopupEditor";
+import PopupEditor from "components/PopupEditor";
+import AddProduct from "components/AddProduct";
 
 //ProductList component
 class ProductList extends React.Component {
@@ -103,9 +104,15 @@ class ProductList extends React.Component {
     });
   };
 
+  //open popup editor
   addProduct = () => {
-    PopupEditor.showPopup()
-  }
+    PopupEditor.showPopup({
+      component: AddProduct,
+      callBackFunc: data => {
+        console.log('Product Data:', data);
+      }
+    });
+  };
 
   render() {
     return (
@@ -113,9 +120,12 @@ class ProductList extends React.Component {
         {/* pass search function to productList Header (contains search button) */}
         <ProductListHeader search={this.search} />
         <CategoryList />
-        
+
         <div className="products-container">
-          <button className="button is-danger popup-btn" onClick={this.addProduct}>
+          <button
+            className="button is-danger popup-btn"
+            onClick={this.addProduct}
+          >
             + Add Product +
           </button>
           {/* each line has 12 slots */}
@@ -132,7 +142,6 @@ class ProductList extends React.Component {
               );
             })}
           </div>
-          
         </div>
       </div>
     );
