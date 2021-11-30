@@ -8,10 +8,10 @@ const mysql = require("mysql");
 //setup db connection
 const db = mysql.createConnection({
   //your db credentials
-  user: "root",
-  host: "localhost",
-  password: "",
-  database: "",
+  user:'root',
+  host:'34.66.235.245',
+  password:'admin',
+  database:'SE3309'
 });
 
 //connect
