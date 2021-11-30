@@ -44,7 +44,7 @@ class ProductItem extends React.Component {
             <span>{price}</span>
           </p>
           {/* add to cart button*/}
-          <button className="item-btn" disabled={prodStatus === 'Unavailable'}>
+          <button className="item-btn" disabled={prodStatus === 'unavailable'}>
             <i className="fas fa-shopping-cart"></i>
             {/* show cancel icon when out of stock */}
             <i className="fas fa-cancel"></i>
