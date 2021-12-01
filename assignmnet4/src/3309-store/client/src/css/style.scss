@@ -319,13 +319,13 @@
 }
 .window {
   position: fixed;
-  width: 25rem;
+  width: 35rem;
   top: 0;
   bottom: 0;
   right: 0;
   background: #fff;
   box-shadow: -3px 0 3px rgba(0, 0, 0, 0.04);
-  transform: translateX(25rem);
+  transform: translateX(35rem);
   transition: all 0.3s ease-in-out;
   z-index: 99;
   .window-header {
