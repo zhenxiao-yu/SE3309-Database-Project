@@ -5,13 +5,22 @@ const app = express();
 //using mysql
 const mysql = require("mysql");
 
+// //setup db connection
+// const db = mysql.createConnection({
+//   //your db credentials
+//   user:'root',
+//   host:'34.66.235.245',
+//   password:'admin',
+//   database:'SE3309'
+// });
+
 //setup db connection
 const db = mysql.createConnection({
   //your db credentials
-  user:'root',
-  host:'34.66.235.245',
-  password:'admin',
-  database:'SE3309'
+  user: "root",
+  host: "localhost",
+  password: "615615",
+  database: "SE3309",
 });
 
 //connect
@@ -28,6 +37,28 @@ app.listen(port, () => console.log(`Server started. Running at: ${server}`));
 
 //define apis below
 
-app.get("/products", function (req, res) {
-    //return list of all products
+//return list of all products
+app.get("/products", function (req, res) {});
+
+//insert into product
+app.post("/products", (req, res) => {
+  const prodName = req.body.prodName;
+  const stock = req.body.stock;
+  const price = req.body.price;
+  const category = req.body.category;
+  const image = req.body.image;
+  const subtitle = req.body.subtitle;
+  const descr = req.body.descr;
+  const prodStatus = req.body.prodStatus;
+  db.query(
+    "INSERT INTO product (prodName, subtitle, image, descr, price, stock, prodStatus) VALUES (?,?,?,?,?,?,?,?)",
+    [prodName, stock, price],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("values are properly inserted");
+      }
+    }
+  );
 });
