@@ -1,6 +1,22 @@
 import React from "react";
+import PopupEditor from "components/PopupEditor";
+import EditProduct from "components/EditProduct";
 
 class ProductItem extends React.Component {
+
+  //open  product editor window method
+  editProduct = () => {
+    PopupEditor.showPopup({
+      component: EditProduct,
+      props: {
+        product: this.props.product,
+      },
+      callBackFunc: data => {
+        console.log(data);
+      },
+    });
+  };
+
   render() {
     //   destructure props
     const { prodName, price, stock, prodStatus, viewCount, category, image } =
@@ -18,7 +34,7 @@ class ProductItem extends React.Component {
         {/* details/info about the product */}
         <div className="item-content">
           {/* edit button */}
-          <div className="item-header has-text-right">
+          <div className="item-header has-text-right" onClick={this.editProduct}>
             <span className="icon edit-button">
               <i class="fa-solid fa-sliders"></i>
             </span>

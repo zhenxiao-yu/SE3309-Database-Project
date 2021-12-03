@@ -4,6 +4,7 @@ import axios from "utils/axios";
 class EditProduct extends React.Component {
   //form state
   state = {
+    id:'',
     prodName: "",
     sellerId: "",
     stock: "",
@@ -14,6 +15,21 @@ class EditProduct extends React.Component {
     descr: "",
     prodStatus: "normal",
   };
+
+  //render existing product info on mount
+  componentDidMount() {
+      const { id, prodName, price, stock, prodStatus, viewCount, category, image } = this.props.product;
+      this.setState({
+        id, 
+        prodName, 
+        price, 
+        stock, 
+        prodStatus, 
+        viewCount, 
+        category, 
+        image
+      });
+  }
 
   handleChange = (event) => {
     //monitor form input
@@ -32,16 +48,16 @@ class EditProduct extends React.Component {
     //console.log(product);
 
     //send product information to server
-    axios.post("products", product).then((res) => {
+    axios.put(`products/${this.state.id}`, product).then((res) => {
       console.log(res.data);
-      alert("new product added");
+      alert("product edited");
     });
   };
 
   render() {
     return (
       <div className="child-popup">
-        <p className="title has-text-centered is-4">Add A New Product</p>
+        <p className="title has-text-centered is-4">Edit Product</p>
         <form onSubmit={this.submit}>
           {/* product name */}
           <div className="field">

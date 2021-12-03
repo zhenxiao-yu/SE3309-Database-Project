@@ -20,12 +20,17 @@ class PopupEditor extends React.Component {
   };
 
   //showPopup method
-  showPopup = (options) => {
+  showPopup = (options= {
+    props: {},
+    component: null,
+    callback: () => {}
+  }) => {
     //define key as current time, so that key changes every time popup opens
     const popupKey = new Date().getTime();
-    const { component, callBackFunc } = options;
+    const { props, component, callBackFunc } = options;
     // create child as react element amd pass on parent hide method
     const newComponent = React.createElement(component, {
+      ...props, 
       key: popupKey,
       hidePopup: this.hidePopup,
     });
