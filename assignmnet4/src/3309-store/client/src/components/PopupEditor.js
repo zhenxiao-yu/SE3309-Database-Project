@@ -8,7 +8,7 @@ class PopupEditor extends React.Component {
     on: false,
     //initial state doesn't carry child component
     component: null,
-    callBackFunc: ()=> {},
+    callBackFunc: () => {},
   };
 
   //hidePopup method
@@ -22,14 +22,17 @@ class PopupEditor extends React.Component {
   //showPopup method
   showPopup = (options) => {
     //define key as current time, so that key changes every time popup opens
-    const popupKey = new Date().getTime()
+    const popupKey = new Date().getTime();
     const { component, callBackFunc } = options;
     // create child as react element amd pass on parent hide method
-    const newComponent = React.createElement(component, { key: popupKey, hidePopup: this.hidePopup});
+    const newComponent = React.createElement(component, {
+      key: popupKey,
+      hidePopup: this.hidePopup,
+    });
     this.setState({
       on: true,
       component: newComponent,
-      callBackFunc: callBackFunc
+      callBackFunc: callBackFunc,
     });
   };
 
@@ -43,11 +46,21 @@ class PopupEditor extends React.Component {
     return (
       <div className={popup_class[this.state.on]}>
         {/* hide popup when overlay is clicked */}
-        <div className="overlay" onClick={this.hidePopup}></div>
+        <div
+          className="overlay"
+          onClick={() => {
+            this.hidePopup();
+          }}
+        ></div>
         <div className="window">
           <div className="window-header">
             {/* hide popup when x is clicked */}
-            <span className="close-btn" onClick={this.hidePopup}>
+            <span
+              className="close-btn"
+              onClick={() => {
+                this.hidePopup();
+              }}
+            >
               x
             </span>
             {this.state.component}

@@ -8,15 +8,21 @@ class ProductItem extends React.Component {
 
     //change class based on product status
     const productClass = {
-        normal: 'item-container',
-        unavailable: 'item-container out-of-stock',
-        sale: 'item-container on-sale'
-    }
+      normal: "item-container",
+      unavailable: "item-container out-of-stock",
+      sale: "item-container on-sale",
+    };
 
     return (
       <div className={productClass[prodStatus]}>
         {/* details/info about the product */}
         <div className="item-content">
+          {/* edit button */}
+          <div className="item-header has-text-right">
+            <span className="icon edit-button">
+              <i class="fa-solid fa-sliders"></i>
+            </span>
+          </div>
           <div className="item-img-container">
             <div className="on-sale-label">On Sale!</div>
             <div className="out-of-stock-label">Out Of Stock</div>
@@ -44,7 +50,7 @@ class ProductItem extends React.Component {
             <span>{price}</span>
           </p>
           {/* add to cart button*/}
-          <button className="item-btn" disabled={prodStatus === 'unavailable'}>
+          <button className="item-btn" disabled={prodStatus === "unavailable"}>
             <i className="fas fa-shopping-cart"></i>
             {/* show cancel icon when out of stock */}
             <i className="fas fa-cancel"></i>

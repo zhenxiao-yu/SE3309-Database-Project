@@ -150,17 +150,19 @@
 .item-container {
   background: #fff;
   padding: 1.5rem;
-  .p-head {
+  .item-header {
     height: 1.2rem;
-    .edit-btn {
+    .edit-button {
       cursor: pointer;
-      color: rgb(216, 215, 215);
+      color: rgb(122, 122, 122);
+      
     }
   }
 
   .item-content {
     .item-img-container {
       position: relative;
+      margin-top: 10px;
       .out-of-stock-label {
         position: absolute;
         top: 0;

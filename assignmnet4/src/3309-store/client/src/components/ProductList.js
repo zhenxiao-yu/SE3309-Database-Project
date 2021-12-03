@@ -109,10 +109,30 @@ class ProductList extends React.Component {
     PopupEditor.showPopup({
       component: AddProduct,
       callBackFunc: data => {
-        console.log('Product Data:', data);
+        //when the data is mot empty, add new data to a list of products
+        if (data){
+          this.add(data);
+        }
+        console.log('Product Data:', data); //test 
       }
     });
   };
+
+  add = (product) => {
+    //add newly created create product to the list
+    const _products = [...this.state.products]
+    _products.push(product)
+    //add newly created create product to the original list
+    const _originalProducts = [...this.state.originalProducts]
+    _originalProducts.push(product)
+
+    //update current displayed product list and original product list
+    this.setState({
+      products: _products,
+      originalProducts: _originalProducts
+    })
+
+  }
 
   render() {
     return (

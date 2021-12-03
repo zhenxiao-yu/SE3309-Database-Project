@@ -38,7 +38,9 @@ app.listen(port, () => console.log(`Server started. Running at: ${server}`));
 //define apis below
 
 //return list of all products
-app.get("/products", function (req, res) {});
+app.get("/products", function (req, res) {
+  
+});
 
 //insert into product
 app.post("/products", (req, res) => {
