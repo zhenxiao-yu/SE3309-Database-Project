@@ -23,7 +23,8 @@ class Login extends React.Component {
 
     axios.get(`http://localhost:3001/verifylogin?username=${username}&password=${password}`).then((res) => {
       if (res.data) {
-        loginInfo.login = username;
+        loginInfo.username = username;
+        loginInfo.id = res.data;
         this.props.history.push('/');
       } else {
         this.setState ({

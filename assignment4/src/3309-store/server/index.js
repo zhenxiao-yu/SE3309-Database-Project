@@ -142,11 +142,15 @@ app.put("/updateproduct:id", (req, res) => {
 });
 
 app.get("/verifylogin" , (req, res) => {
-  db.query(`SELECT pass FROM AllAccount WHERE username = "${req.query.username}"`, (err, result) => {
+  db.query(`SELECT id, pass FROM AllAccount WHERE username = "${req.query.username}"`, (err, result) => {
     if (err) {
       console.log(err);
     }else {
-      res.send(result[0] != null && result[0].pass == req.query.password)
+      if (result[0] != null && result[0].pass == req.query.password) {
+        res.send(result[0].id)
+      } else {
+        res.send(false);
+      }
     }
   });
 });
