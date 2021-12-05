@@ -94,7 +94,7 @@ class ProductList extends React.Component {
     //get new product list array
     let search_products = [...this.state.originalProducts];
     //filter new array
-    search_products.filter((product) => {
+    search_products = search_products.filter((product) => {
       // not case sensitive, search by product name
       const result = product.prodName.match(new RegExp(searchText, "gi"));
       return !!result;
