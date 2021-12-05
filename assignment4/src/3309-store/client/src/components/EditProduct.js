@@ -59,6 +59,32 @@ class EditProduct extends React.Component {
       <div className="child-popup">
         <p className="title has-text-centered is-4">Edit Product</p>
         <form onSubmit={this.submit}>
+                   {/* product id */}
+                   <div className="field">
+            <label className="label has-text-left">Product ID</label>
+            <div className="control">
+              <input
+                type="number"
+                className="input"
+                name="id"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          {/* seller id */}
+          <div className="field">
+            <label className="label has-text-left">Seller ID</label>
+            <div className="control">
+              <input
+                type="number"
+                className="input"
+                name="sellerID"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
           {/* product name */}
           <div className="field">
             <label className="label has-text-left">Product Name</label>
@@ -72,7 +98,6 @@ class EditProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product stock */}
           <div className="field">
             <div className="control">
@@ -86,7 +111,6 @@ class EditProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product price */}
           <div className="field">
             <div className="control">
@@ -100,7 +124,6 @@ class EditProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product category */}
           <div className="field">
             <div className="control">
@@ -114,7 +137,19 @@ class EditProduct extends React.Component {
               />
             </div>
           </div>
-
+           {/* product view count */}
+           <div className="field">
+            <div className="control">
+              <label className="label has-text-left">View Count</label>
+              <input
+                type="text"
+                className="input"
+                name="viewCount"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
           {/* product image */}
           <div className="field">
             <div className="control">
@@ -127,7 +162,6 @@ class EditProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product subtitle */}
           <div className="field">
             <div className="control">
@@ -141,7 +175,6 @@ class EditProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product description */}
           <div className="field">
             <div className="control">
@@ -154,7 +187,6 @@ class EditProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product status */}
           <div className="field">
             <div className="control">

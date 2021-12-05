@@ -7,13 +7,14 @@ class AddProduct extends React.Component {
     id: "",
     prodName: "",
     sellerID: "",
-    stock: "",
-    price: "",
-    category: "",
-    image: "",
     subtitle: "",
+    image: "",
     descr: "",
+    price: "",
+    stock: "",
     prodStatus: "normal",
+    viewCount: "",
+    category: "",
   };
 
   handleChange = (event) => {
@@ -83,7 +84,6 @@ class AddProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product stock */}
           <div className="field">
             <div className="control">
@@ -97,7 +97,6 @@ class AddProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product price */}
           <div className="field">
             <div className="control">
@@ -111,7 +110,6 @@ class AddProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product category */}
           <div className="field">
             <div className="control">
@@ -125,7 +123,19 @@ class AddProduct extends React.Component {
               />
             </div>
           </div>
-
+           {/* product view count */}
+           <div className="field">
+            <div className="control">
+              <label className="label has-text-left">View Count</label>
+              <input
+                type="text"
+                className="input"
+                name="viewCount"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
           {/* product image */}
           <div className="field">
             <div className="control">
@@ -138,7 +148,6 @@ class AddProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product subtitle */}
           <div className="field">
             <div className="control">
@@ -152,7 +161,6 @@ class AddProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product description */}
           <div className="field">
             <div className="control">
@@ -165,7 +173,6 @@ class AddProduct extends React.Component {
               />
             </div>
           </div>
-
           {/* product status */}
           <div className="field">
             <div className="control">
