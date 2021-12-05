@@ -3,7 +3,6 @@ import PopupEditor from "components/PopupEditor";
 import EditProduct from "components/EditProduct";
 
 class ProductItem extends React.Component {
-
   //open  product editor window method
   editProduct = () => {
     PopupEditor.showPopup({
@@ -11,16 +10,29 @@ class ProductItem extends React.Component {
       props: {
         product: this.props.product,
       },
-      callBackFunc: data => {
+      callBackFunc: (data) => {
         console.log(data);
       },
     });
   };
 
+
+
   render() {
     //   destructure props
-    const { prodName, price, stock, prodStatus, viewCount, category, image } =
-      this.props.product;
+    const {
+      id,
+      prodName,
+      sellerID,
+      subtitle,
+      image,
+      descr,
+      price,
+      stock,
+      prodStatus,
+      viewCount,
+      category,
+    } = this.props.product;
 
     //change class based on product status
     const productClass = {
@@ -29,12 +41,28 @@ class ProductItem extends React.Component {
       sale: "item-container on-sale",
     };
 
+    //change database value to frontend product status
+    const statusConverter = (prodStatus) => {
+      if (prodStatus === "Normal"){
+        return "normal";
+      } else if (prodStatus === "Out of Stock") {
+        return "unavailable"
+      } else if (prodStatus === "On Sale") {
+        return "sale"
+      }
+  
+    }
+ 
+
     return (
-      <div className={productClass[prodStatus]}>
+      <div className={productClass[statusConverter(prodStatus)]}>
         {/* details/info about the product */}
         <div className="item-content">
           {/* edit button */}
-          <div className="item-header has-text-right" onClick={this.editProduct}>
+          <div
+            className="item-header has-text-right"
+            onClick={this.editProduct}
+          >
             <span className="icon edit-button">
               <i class="fa-solid fa-sliders"></i>
             </span>
@@ -42,7 +70,7 @@ class ProductItem extends React.Component {
           <div className="item-img-container">
             <div className="on-sale-label">On Sale!</div>
             <div className="out-of-stock-label">Out Of Stock</div>
-            <figure className="image is-4by3">
+            <figure className="image is-4by3 ">
               <img src={image} alt={prodName}></img>
             </figure>
           </div>

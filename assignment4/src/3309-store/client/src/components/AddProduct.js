@@ -34,7 +34,7 @@ class AddProduct extends React.Component {
     //console.log(product);
 
     //send product information to server
-    axios.post("products", product).then((res) => {
+    axios.post("http://localhost:3001/products", product).then((res) => {
       console.log(res.data);
       alert("new product added");
     });

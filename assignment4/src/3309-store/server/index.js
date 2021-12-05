@@ -4,6 +4,11 @@ const express = require("express");
 const app = express();
 //using mysql
 const mysql = require("mysql");
+//using cors
+const cors = require("cors");
+app.use(express.json());
+
+app.use(cors());
 
 // //setup db connection
 // const db = mysql.createConnection({
@@ -38,15 +43,22 @@ app.listen(port, () => console.log(`Server started. Running at: ${server}`));
 //define apis below
 
 //return list of all products
-app.get("/products", function (req, res) {
-  
+app.get("/products", (req, res) => {
+  db.query("SELECT * FROM product", (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  });
 });
 
 //insert into product
 app.post("/products", (req, res) => {
+  console.log(req.body);
   const id = req.body.id;
   const prodName = req.body.prodName;
-  const sellerId = req.body.sellerID;
+  const sellerID = req.body.sellerID;
   const subtitle = req.body.subtitle;
   const image = req.body.image;
   const descr = req.body.descr;
@@ -57,10 +69,23 @@ app.post("/products", (req, res) => {
   const category = req.body.category;
   db.query(
     "INSERT INTO product (id, prodName, sellerID, subtitle, image, descr, price, stock, prodStatus, viewCount, category) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
-    [prodName, sellerId, stock, price, category, image, subtitle, descr, prodStatus],
+    [
+      id,
+      prodName,
+      sellerID,
+      subtitle,
+      image,
+      descr,
+      price,
+      stock,
+      prodStatus,
+      viewCount,
+      category,
+    ],
     (err, result) => {
       if (err) {
         console.log(err);
+        console.log(result);
       } else {
         res.send("values are properly inserted");
       }
