@@ -35,7 +35,8 @@ class AddProduct extends React.Component {
 
     //send product information to server
     axios.post("http://localhost:3001/newproduct", product).then((res) => {
-      console.log(res.data);
+      //close editor window + pass props to product list
+      this.props.hidePopup(res.data);
       alert("new product added");
     });
   };
@@ -123,8 +124,8 @@ class AddProduct extends React.Component {
               />
             </div>
           </div>
-           {/* product view count */}
-           <div className="field">
+          {/* product view count */}
+          <div className="field">
             <div className="control">
               <label className="label has-text-left">View Count</label>
               <input

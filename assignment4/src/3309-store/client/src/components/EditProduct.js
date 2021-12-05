@@ -4,16 +4,17 @@ import axios from "utils/axios";
 class EditProduct extends React.Component {
   //form state
   state = {
-    id:'',
+    id: "",
     prodName: "",
-    sellerId: "",
-    stock: "",
-    price: "",
-    category: "",
-    image: "",
+    sellerID: "",
     subtitle: "",
+    image: "",
     descr: "",
-    prodStatus: "normal",
+    price: "",
+    stock: "",
+    prodStatus: "Normal",
+    viewCount: "",
+    category: "",
   };
 
   //render existing product info on mount
@@ -45,10 +46,9 @@ class EditProduct extends React.Component {
     e.preventDefault();
     // get product info from add new product form
     const product = { ...this.state };
-    //console.log(product);
-
+    
     //send product information to server
-    axios.put(`products/${this.state.id}`, product).then((res) => {
+    axios.put(`http://localhost:3001/products/${this.state.id}`, product).then((res) => {
       console.log(res.data);
       alert("product edited");
     });

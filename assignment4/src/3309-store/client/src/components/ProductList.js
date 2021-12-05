@@ -126,7 +126,6 @@ class ProductList extends React.Component {
     //add newly created create product to the original list
     const _originalProducts = [...this.state.originalProducts];
     _originalProducts.push(product);
-
     //update current displayed product list and original product list
     this.setState({
       products: _products,
@@ -151,12 +150,10 @@ class ProductList extends React.Component {
           {/* each line has 12 slots */}
           <div className="columns is-multiline is-desktop">
             {/* iterate through all products */}
-
-            {/* !!!!!! use this.state.products.map when database is configured !!!!!*/}
             {this.state.products.map((product) => {
               return (
                 // each column is 3 slots, thus 4 products per line
-                <div className="column is-3" key={product.prodName}>
+                <div className="column is-3" key={product.id}>
                   <ProductItem product={product} />
                 </div>
               );
