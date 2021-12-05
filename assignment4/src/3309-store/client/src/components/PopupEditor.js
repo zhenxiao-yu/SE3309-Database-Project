@@ -11,22 +11,22 @@ class PopupEditor extends React.Component {
     callback: () => {},
   };
 
-  //showPopup method
-  showPopup = (
+  //open method
+  open = (
     options = {
       props: {},
       component: null,
       callback: () => {},
     }
   ) => {
+    const { props, component, callback } = options;
     //define key as current time, so that key changes every time popup opens
     const popupKey = new Date().getTime();
-    const { props, component, callback } = options;
     // create child as react element and pass on parent hide method
     const newComponent = React.createElement(component, {
       ...props,
+      close: this.close,
       key: popupKey,
-      hidePopup: this.hidePopup,
     });
     this.setState({
       on: true,
@@ -35,15 +35,15 @@ class PopupEditor extends React.Component {
     });
   };
 
-  //hidePopup method
-  hidePopup = data => {
+  //close method
+  close = (data) => {
     alert(data);
     this.setState({
       on: false,
     });
     this.state.callback(data);
   };
-  
+
   render() {
     //change css class based on state of the component
     const popup_class = {
@@ -57,7 +57,7 @@ class PopupEditor extends React.Component {
         <div
           className="overlay"
           onClick={() => {
-            this.hidePopup();
+            this.close();
           }}
         ></div>
         <div className="window">
@@ -66,7 +66,7 @@ class PopupEditor extends React.Component {
             <span
               className="close-btn"
               onClick={() => {
-                this.hidePopup();
+                this.close();
               }}
             >
               x
