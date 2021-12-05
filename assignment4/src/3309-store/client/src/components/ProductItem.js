@@ -10,7 +10,7 @@ class ProductItem extends React.Component {
       props: {
         product: this.props.product,
       },
-      callBackFunc: (data) => {
+      callback: (data) => {
         console.log(data);
       },
     });

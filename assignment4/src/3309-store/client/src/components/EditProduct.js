@@ -19,17 +19,32 @@ class EditProduct extends React.Component {
 
   //render existing product info on mount
   componentDidMount() {
-      const { id, prodName, price, stock, prodStatus, viewCount, category, image } = this.props.product;
-      this.setState({
-        id, 
-        prodName, 
-        price, 
-        stock, 
-        prodStatus, 
-        viewCount, 
-        category, 
-        image
-      });
+    const {
+      id,
+      prodName,
+      sellerID,
+      subtitle,
+      image,
+      descr,
+      price,
+      stock,
+      prodStatus,
+      viewCount,
+      category,
+    } = this.props.product;
+    this.setState({
+      id,
+      prodName,
+      sellerID,
+      subtitle,
+      image,
+      descr,
+      price,
+      stock,
+      prodStatus,
+      viewCount,
+      category,
+    });
   }
 
   handleChange = (event) => {
@@ -46,12 +61,14 @@ class EditProduct extends React.Component {
     e.preventDefault();
     // get product info from add new product form
     const product = { ...this.state };
-    
+    console.log(this.state.id);
     //send product information to server
-    axios.put(`http://localhost:3001/products/${this.state.id}`, product).then((res) => {
-      console.log(res.data);
-      alert("product edited");
-    });
+    axios
+      .put(`http://localhost:3001/updateproduct/`, product)
+      .then((res) => {
+        console.log(res.data);
+        alert("product edited");
+      });
   };
 
   render() {
@@ -59,8 +76,8 @@ class EditProduct extends React.Component {
       <div className="child-popup">
         <p className="title has-text-centered is-4">Edit Product</p>
         <form onSubmit={this.submit}>
-                   {/* product id */}
-                   <div className="field">
+          {/* product id */}
+          <div className="field">
             <label className="label has-text-left">Product ID</label>
             <div className="control">
               <input
@@ -137,8 +154,8 @@ class EditProduct extends React.Component {
               />
             </div>
           </div>
-           {/* product view count */}
-           <div className="field">
+          {/* product view count */}
+          <div className="field">
             <div className="control">
               <label className="label has-text-left">View Count</label>
               <input

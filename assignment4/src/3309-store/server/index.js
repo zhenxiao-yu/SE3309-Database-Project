@@ -7,7 +7,6 @@ const mysql = require("mysql");
 //using cors
 const cors = require("cors");
 
-
 app.use(express.json());
 app.use(cors());
 
@@ -47,9 +46,9 @@ app.listen(port, () => console.log(`Server started. Running at: ${server}`));
 app.get("/products", (req, res) => {
   db.query("SELECT * FROM product ORDER BY id DESC", (err, result) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
-      res.send(result)
+      res.send(result);
     }
   });
 });
@@ -92,3 +91,41 @@ app.post("/newproduct", (req, res) => {
     }
   );
 });
+
+app.put("/updateproduct:id", (req, res) => {
+  const id = req.body.id;
+  const prodName = req.body.prodName;
+  const sellerID = req.body.sellerID;
+  const subtitle = req.body.subtitle;
+  const image = req.body.image;
+  const descr = req.body.descr;
+  const price = req.body.price;
+  const stock = req.body.stock;
+  const prodStatus = req.body.prodStatus;
+  const viewCount = req.body.viewCount;
+  const category = req.body.category;
+  db.query(
+    "UPDATE SET product (prodName,sellerID,subtitle,image,descr,price,stock,prodStatus,viewCount,category) = (?,?,?,?,?,?,?,?,?,?,?) WHERE id = ?",
+    [
+      prodName,
+      sellerID,
+      subtitle,
+      image,
+      descr,
+      price,
+      stock,
+      prodStatus,
+      viewCount,
+      category,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("values are updated");
+      }
+    }
+  );
+});
+
+// app.delete()

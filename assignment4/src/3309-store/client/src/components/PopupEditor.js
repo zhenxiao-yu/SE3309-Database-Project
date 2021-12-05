@@ -8,15 +8,7 @@ class PopupEditor extends React.Component {
     on: false,
     //initial state doesn't carry child component
     component: null,
-    callBackFunc: () => {},
-  };
-
-  //hidePopup method
-  hidePopup = (data) => {
-    this.setState({
-      on: false,
-    });
-    this.state.callBackFunc(data);
+    callback: () => {},
   };
 
   //showPopup method
@@ -29,8 +21,8 @@ class PopupEditor extends React.Component {
   ) => {
     //define key as current time, so that key changes every time popup opens
     const popupKey = new Date().getTime();
-    const { props, component, callBackFunc } = options;
-    // create child as react element amd pass on parent hide method
+    const { props, component, callback } = options;
+    // create child as react element and pass on parent hide method
     const newComponent = React.createElement(component, {
       ...props,
       key: popupKey,
@@ -39,10 +31,19 @@ class PopupEditor extends React.Component {
     this.setState({
       on: true,
       component: newComponent,
-      callBackFunc: callBackFunc,
+      callback: callback,
     });
   };
 
+  //hidePopup method
+  hidePopup = data => {
+    alert(data);
+    this.setState({
+      on: false,
+    });
+    this.state.callback(data);
+  };
+  
   render() {
     //change css class based on state of the component
     const popup_class = {

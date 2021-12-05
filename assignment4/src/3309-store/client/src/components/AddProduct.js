@@ -31,8 +31,6 @@ class AddProduct extends React.Component {
     e.preventDefault();
     // get product info from add new product form
     const product = { ...this.state };
-    //console.log(product);
-
     //send product information to server
     axios.post("http://localhost:3001/newproduct", product).then((res) => {
       //close editor window + pass props to product list
@@ -129,7 +127,7 @@ class AddProduct extends React.Component {
             <div className="control">
               <label className="label has-text-left">View Count</label>
               <input
-                type="text"
+                type="number"
                 className="input"
                 name="viewCount"
                 value={this.state.name}
