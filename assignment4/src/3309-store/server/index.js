@@ -24,8 +24,8 @@ const db = mysql.createConnection({
   //your db credentials
   user: "root",
   host: "localhost",
-  password: "615615",
-  database: "SE3309",
+  password: "password",
+  database: "ecommerce",
 });
 
 //connect
@@ -41,6 +41,19 @@ const server = `http://localhost:${port}`;
 app.listen(port, () => console.log(`Server started. Running at: ${server}`));
 
 //define apis below
+
+//return list of targeted advertisements for a specific user
+app.get("/ads", (req, res) => {
+  db.query(`SELECT p.* FROM Product p, TargetedAdvertisement ta WHERE ta.userID = ${req.query.userID} AND ta.prodID = p.id  AND p.prodStatus <> "Out of Stock"`, (err, result) => {
+    if (err) {
+      console.log(err);
+    }else {
+      res.send (result);
+    }
+  });
+
+
+});
 
 //return list of all products in reverse order
 app.get("/products", (req, res) => {
