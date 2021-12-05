@@ -204,7 +204,7 @@ class AddProduct extends React.Component {
                 className="button"
                 type="button"
                 onClick={() => {
-                  this.props.close();
+                  this.props.close("AddInven data");
                 }}
               >
                 Cancel

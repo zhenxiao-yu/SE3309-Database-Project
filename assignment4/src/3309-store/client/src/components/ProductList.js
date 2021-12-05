@@ -59,7 +59,6 @@ class ProductList extends React.Component {
       component: AddProduct,
       callback: data => {
         //when the data is not empty, add new data to a list of products
-        console.log(data)
         if (data) {
           this.add(data);
         }

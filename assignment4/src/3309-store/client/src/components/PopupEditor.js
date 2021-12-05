@@ -8,39 +8,50 @@ class PopupEditor extends React.Component {
     on: false,
     //initial state doesn't carry child component
     component: null,
-    callback: () => {},
+    callback: () => {}
   };
 
   //open method
-  open = (
-    options = {
-      props: {},
-      component: null,
-      callback: () => {},
-    }
-  ) => {
+  // open = (
+  //   options = {
+  //     props: {},
+  //     component: null,
+  //     callback: () => {}
+  //   }
+  // ) => {
+  //   const { props, component, callback } = options;
+  //   //define key as current time, so that key changes every time popup opens
+  //   const popupKey = new Date().getTime();
+  //   // create child as react element and pass on parent hide method
+  //   const newComponent = React.createElement(component, {
+  //     ...props,
+  //     close: this.close,
+  //     key: popupKey,
+  //   });
+  //   this.setState({
+  //     on: true,
+  //     component: newComponent,
+  //     callback: callback,
+  //   });
+  // };
+
+  open = options => {
     const { props, component, callback } = options;
-    //define key as current time, so that key changes every time popup opens
-    const popupKey = new Date().getTime();
-    // create child as react element and pass on parent hide method
-    const newComponent = React.createElement(component, {
-      ...props,
-      close: this.close,
-      key: popupKey,
-    });
+    const newComponent = React.createElement(component, { close: this.close});
     this.setState({
       on: true,
       component: newComponent,
       callback: callback,
-    });
-  };
+    })
+
+  }
 
   //close method
   close = (data) => {
-    alert(data);
     this.setState({
       on: false,
     });
+    // get data from child component and pass it on using callback
     this.state.callback(data);
   };
 
