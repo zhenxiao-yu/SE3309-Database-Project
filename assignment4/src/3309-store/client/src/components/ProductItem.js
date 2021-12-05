@@ -5,7 +5,7 @@ import EditProduct from "components/EditProduct";
 class ProductItem extends React.Component {
   //open  product editor window method
   editProduct = () => {
-    PopupEditor.showPopup({
+    PopupEditor.open({
       component: EditProduct,
       props: {
         product: this.props.product,

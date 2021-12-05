@@ -46,7 +46,7 @@ class ProductList extends React.Component {
 
   //open popup editor
   addProduct = () => {
-    PopupEditor.showPopup({
+    PopupEditor.open({
       component: AddProduct,
       callback: data => {
         //when the data is not empty, add new data to a list of products

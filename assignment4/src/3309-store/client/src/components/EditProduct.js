@@ -236,7 +236,7 @@ class EditProduct extends React.Component {
                 className="button"
                 type="button"
                 onClick={() => {
-                  this.props.hidePopup();
+                  this.props.close();
                 }}
               >
                 Cancel

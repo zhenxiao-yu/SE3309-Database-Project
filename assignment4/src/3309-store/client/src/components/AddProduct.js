@@ -34,7 +34,7 @@ class AddProduct extends React.Component {
     //send product information to server
     axios.post("http://localhost:3001/newproduct", product).then((res) => {
       //close editor window + pass props to product list
-      this.props.hidePopup(res.data);
+      this.props.close(res.data);
       alert("new product added");
     });
   };
@@ -52,7 +52,7 @@ class AddProduct extends React.Component {
                 type="number"
                 className="input"
                 name="id"
-                value={this.state.name}
+                value={this.state.id}
                 onChange={this.handleChange}
               />
             </div>
@@ -65,7 +65,7 @@ class AddProduct extends React.Component {
                 type="number"
                 className="input"
                 name="sellerID"
-                value={this.state.name}
+                value={this.state.sellerID}
                 onChange={this.handleChange}
               />
             </div>
@@ -78,7 +78,7 @@ class AddProduct extends React.Component {
                 type="text"
                 className="input"
                 name="prodName"
-                value={this.state.name}
+                value={this.state.prodName}
                 onChange={this.handleChange}
               />
             </div>
@@ -91,7 +91,7 @@ class AddProduct extends React.Component {
                 type="number"
                 className="input"
                 name="stock"
-                value={this.state.name}
+                value={this.state.stock}
                 onChange={this.handleChange}
               />
             </div>
@@ -104,7 +104,7 @@ class AddProduct extends React.Component {
                 type="number"
                 className="input"
                 name="price"
-                value={this.state.name}
+                value={this.state.price}
                 onChange={this.handleChange}
               />
             </div>
@@ -117,7 +117,7 @@ class AddProduct extends React.Component {
                 type="text"
                 className="input"
                 name="category"
-                value={this.state.name}
+                value={this.state.category}
                 onChange={this.handleChange}
               />
             </div>
@@ -130,7 +130,7 @@ class AddProduct extends React.Component {
                 type="number"
                 className="input"
                 name="viewCount"
-                value={this.state.name}
+                value={this.state.viewCount}
                 onChange={this.handleChange}
               />
             </div>
@@ -142,7 +142,7 @@ class AddProduct extends React.Component {
               <textarea
                 className="textarea"
                 name="image"
-                value={this.state.name}
+                value={this.state.image}
                 onChange={this.handleChange}
               />
             </div>
@@ -155,7 +155,7 @@ class AddProduct extends React.Component {
                 type="text"
                 className="input"
                 name="subtitle"
-                value={this.state.name}
+                value={this.state.subtitle}
                 onChange={this.handleChange}
               />
             </div>
@@ -167,7 +167,7 @@ class AddProduct extends React.Component {
               <textarea
                 className="textarea"
                 name="descr"
-                value={this.state.name}
+                value={this.state.descr}
                 onChange={this.handleChange}
               />
             </div>
@@ -179,7 +179,7 @@ class AddProduct extends React.Component {
               <div className="select is-fullwidth">
                 <select
                   name="prodStatus"
-                  value={this.state.name}
+                  value={this.state.prodStatus}
                   onChange={this.handleChange}
                 >
                   <option>Normal</option>
@@ -204,7 +204,7 @@ class AddProduct extends React.Component {
                 className="button"
                 type="button"
                 onClick={() => {
-                  this.props.hidePopup();
+                  this.props.close();
                 }}
               >
                 Cancel
