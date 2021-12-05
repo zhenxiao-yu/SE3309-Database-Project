@@ -16,15 +16,13 @@ class ProductItem extends React.Component {
     });
   };
 
-
-
   render() {
     //   destructure props
     const {
-      id,
+      //id,
       prodName,
-      sellerID,
-      subtitle,
+      //sellerID,
+      //subtitle,
       image,
       descr,
       price,
@@ -43,16 +41,14 @@ class ProductItem extends React.Component {
 
     //change database value to frontend product status
     const statusConverter = (prodStatus) => {
-      if (prodStatus === "Normal"){
+      if (prodStatus === "Normal") {
         return "normal";
       } else if (prodStatus === "Out of Stock") {
-        return "unavailable"
+        return "unavailable";
       } else if (prodStatus === "On Sale") {
-        return "sale"
+        return "sale";
       }
-  
-    }
- 
+    };
 
     return (
       <div className={productClass[statusConverter(prodStatus)]}>
@@ -83,6 +79,7 @@ class ProductItem extends React.Component {
               {viewCount} <span> views</span>
             </p>
             <p>{category}</p>
+            <p><span>About: </span>{descr}</p>
           </div>
           <p className="item-name">{prodName}</p>
         </div>
@@ -94,7 +91,7 @@ class ProductItem extends React.Component {
             <span>{price}</span>
           </p>
           {/* add to cart button*/}
-          <button className="item-btn" disabled={prodStatus === "unavailable"}>
+          <button className="item-btn" disabled={statusConverter(prodStatus) === "unavailable"}>
             <i className="fas fa-shopping-cart"></i>
             {/* show cancel icon when out of stock */}
             <i className="fas fa-cancel"></i>
