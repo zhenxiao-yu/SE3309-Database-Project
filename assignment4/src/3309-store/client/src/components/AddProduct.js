@@ -12,7 +12,7 @@ class AddProduct extends React.Component {
     descr: "",
     price: "",
     stock: "",
-    prodStatus: "normal",
+    prodStatus: "Normal",
     viewCount: "",
     category: "",
   };
@@ -34,7 +34,7 @@ class AddProduct extends React.Component {
     //console.log(product);
 
     //send product information to server
-    axios.post("http://localhost:3001/products", product).then((res) => {
+    axios.post("http://localhost:3001/newproduct", product).then((res) => {
       console.log(res.data);
       alert("new product added");
     });
@@ -183,9 +183,9 @@ class AddProduct extends React.Component {
                   value={this.state.name}
                   onChange={this.handleChange}
                 >
-                  <option>normal</option>
-                  <option>onsale</option>
-                  <option>unavailable</option>
+                  <option>Normal</option>
+                  <option>On Sale</option>
+                  <option>Out Of Stock</option>
                 </select>
               </div>
             </div>

@@ -43,9 +43,9 @@ app.listen(port, () => console.log(`Server started. Running at: ${server}`));
 
 //define apis below
 
-//return list of all products
+//return list of all products in reverse order
 app.get("/products", (req, res) => {
-  db.query("SELECT * FROM product", (err, result) => {
+  db.query("SELECT * FROM product ORDER BY id DESC", (err, result) => {
     if (err) {
       console.log(err)
     } else {
@@ -55,7 +55,7 @@ app.get("/products", (req, res) => {
 });
 
 //insert into product
-app.post("/products", (req, res) => {
+app.post("/newproduct", (req, res) => {
   console.log(req.body);
   const id = req.body.id;
   const prodName = req.body.prodName;
@@ -86,7 +86,6 @@ app.post("/products", (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
-        console.log(result);
       } else {
         res.send("values are properly inserted");
       }
