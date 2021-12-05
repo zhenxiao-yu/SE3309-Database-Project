@@ -109,7 +109,7 @@ class ProductList extends React.Component {
     PopupEditor.showPopup({
       component: AddProduct,
       callBackFunc: data => {
-        //when the data is mot empty, add new data to a list of products
+        //when the data is not empty, add new data to a list of products
         if (data){
           this.add(data);
         }
