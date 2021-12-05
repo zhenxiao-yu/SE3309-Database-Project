@@ -4,8 +4,9 @@ import axios from "utils/axios";
 class AddProduct extends React.Component {
   //form state
   state = {
+    id: "",
     prodName: "",
-    sellerId: "",
+    sellerID: "",
     stock: "",
     price: "",
     category: "",
@@ -43,6 +44,32 @@ class AddProduct extends React.Component {
       <div className="child-popup">
         <p className="title has-text-centered is-4">Add A New Product</p>
         <form onSubmit={this.submit}>
+          {/* product id */}
+          <div className="field">
+            <label className="label has-text-left">Product ID</label>
+            <div className="control">
+              <input
+                type="number"
+                className="input"
+                name="id"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+          {/* seller id */}
+          <div className="field">
+            <label className="label has-text-left">Seller ID</label>
+            <div className="control">
+              <input
+                type="number"
+                className="input"
+                name="sellerID"
+                value={this.state.name}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
           {/* product name */}
           <div className="field">
             <label className="label has-text-left">Product Name</label>

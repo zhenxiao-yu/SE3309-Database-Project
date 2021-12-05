@@ -298,6 +298,7 @@
   .window {
     transition: all 0.3s ease-in-out;
     transform: translateX(40rem);
+    overflow-y:scroll;
   }
   &.on {
     .overlay {

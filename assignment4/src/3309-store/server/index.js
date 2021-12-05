@@ -44,17 +44,19 @@ app.get("/products", function (req, res) {
 
 //insert into product
 app.post("/products", (req, res) => {
+  const id = req.body.id;
   const prodName = req.body.prodName;
-  const sellerId = req.body.sellerId
-  const stock = req.body.stock;
-  const price = req.body.price;
-  const category = req.body.category;
-  const image = req.body.image;
+  const sellerId = req.body.sellerID;
   const subtitle = req.body.subtitle;
+  const image = req.body.image;
   const descr = req.body.descr;
+  const price = req.body.price;
+  const stock = req.body.stock;
   const prodStatus = req.body.prodStatus;
+  const viewCount = req.body.viewCount;
+  const category = req.body.category;
   db.query(
-    "INSERT INTO product (prodName, sellerID, subtitle, image, descr, price, stock, prodStatus) VALUES (?,?,?,?,?,?,?,?)",
+    "INSERT INTO product (id, prodName, sellerID, subtitle, image, descr, price, stock, prodStatus, viewCount, category) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
     [prodName, sellerId, stock, price, category, image, subtitle, descr, prodStatus],
     (err, result) => {
       if (err) {
