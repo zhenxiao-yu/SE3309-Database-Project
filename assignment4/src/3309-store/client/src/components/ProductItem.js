@@ -66,7 +66,7 @@ class ProductItem extends React.Component {
           <div className="item-img-container">
             <div className="on-sale-label">On Sale!</div>
             <div className="out-of-stock-label">Out Of Stock</div>
-            <figure className="image is-4by3 ">
+            <figure className="image is-4by3 test-image">
               <img src={image} alt={prodName}></img>
             </figure>
           </div>
@@ -79,7 +79,7 @@ class ProductItem extends React.Component {
               {viewCount} <span> views</span>
             </p>
             <p>{category}</p>
-            <p><span>About: </span>{descr}</p>
+            <p><strong>About: </strong>{descr}</p>
           </div>
           <p className="item-name">{prodName}</p>
         </div>
