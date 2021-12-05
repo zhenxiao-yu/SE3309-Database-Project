@@ -1,21 +1,36 @@
 import React from "react";
+import loginInfo from "../variables/loginInfo.js";
+import axios from "utils/axios";
+
 
 //login component
 class Login extends React.Component {
 
-
+  state = {
+    failedLogin: false
+  };
   //login click event
   handleLogin = (event) => {
     //prevent default action
     event.preventDefault();
 
     //get form data from input fields
-    
+    let username = event.target[0].value;
+    let password = event.target[1].value
+
     
     //login logic (verify with server)
 
-    //redirect to home page
-    this.props.history.push('/');
+    axios.get(`http://localhost:3001/verifylogin?username=${username}&password=${password}`).then((res) => {
+      if (res.data) {
+        loginInfo.login = username;
+        this.props.history.push('/');
+      } else {
+        this.setState ({
+          failedLogin: true
+        });
+      }
+    });
   }
 
   render() {
@@ -23,6 +38,9 @@ class Login extends React.Component {
       <div className="login-container">
         <form className="box login-window" onSubmit={this.handleLogin}>
           <h4 className="title is-4">Please Login First.</h4>
+          {
+          this.state.failedLogin? <h3 style={{ color: 'red' }}>Incorrect username or password</h3> : ""
+          }
           {/* Username input field */}
           <div className="field">
             <label className="label">Username</label>
