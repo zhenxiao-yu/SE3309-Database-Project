@@ -104,6 +104,18 @@ class ProductList extends React.Component {
       originalProducts: tempOrigProducts
     });
   };
+
+  //delete product method
+  delete = id => {
+    const tempProducts = this.state.products.filter(p => p.id !== id )
+    const tempOrigProducts = this.state.originalProducts.filter(p => p.id !== id )
+    this.setState({
+      products: tempProducts,
+      originalProducts: tempOrigProducts
+    });
+  }
+
+
   // Handle callback to retrieve state from CategoryList component
   handleCategory(data){
     // Sets the filter state
@@ -144,12 +156,12 @@ class ProductList extends React.Component {
           <div className="columns is-multiline is-desktop">
 
             {/* iterate through the advertisements */}
-            {this.state.productAds.map((p) => {
+            {this.state.productAds.map((ad) => {
               return (
                 // each column is 3 slots, thus 4 products per line
-                <div className="column is-3" key={p.id}>
+                <div className="column is-3" key={ad.id}>
                   <h1>Promoted</h1>
-                  <ProductItem product={p} update={this.edit}/>
+                  <ProductItem product={ad}/>
                 </div>
               );
             })}
@@ -174,7 +186,7 @@ class ProductList extends React.Component {
                 return (
                   // each column is 3 slots, thus 4 products per line
                   <div className="column is-3" key={product.id}>
-                    <ProductItem product={product} />
+                    <ProductItem product={product} edit={this.edit} delete={this.delete}/>
                   </div>
                 );
               })}

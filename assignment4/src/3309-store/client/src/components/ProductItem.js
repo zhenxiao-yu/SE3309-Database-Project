@@ -11,6 +11,7 @@ class ProductItem extends React.Component {
       component: EditProduct,
       props: {
         product: this.props.product,
+        deleteProduct: this.props.delete
       },
       callback: (data) => {
         console.log(data);
