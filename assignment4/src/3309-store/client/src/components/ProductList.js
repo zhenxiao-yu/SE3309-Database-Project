@@ -6,6 +6,7 @@ import axios from "utils/axios";
 import PopupEditor from "components/PopupEditor";
 import AddProduct from "components/AddProduct";
 
+
 //ProductList component
 class ProductList extends React.Component {
   //product list state
@@ -21,11 +22,13 @@ class ProductList extends React.Component {
 
   //fetch data from server
   componentDidMount() {
-    axios.get("http://localhost:3001/ads?userID=70").then((res) => {
-      this.setState({
-        productAds: res.data.slice(0, 4),
+    if (localStorage.getItem("username")) {
+      axios.get(`http://localhost:3001/ads?userID=${localStorage.getItem("userID")}`).then((res) => {
+        this.setState({
+          productAds: res.data.slice(0, 4),
+        });
       });
-    });
+    }
 
     axios.get("http://localhost:3001/products").then((res) => {
       this.setState({
@@ -34,7 +37,7 @@ class ProductList extends React.Component {
       });
     });
 
-    
+
   }
 
   //search for a product

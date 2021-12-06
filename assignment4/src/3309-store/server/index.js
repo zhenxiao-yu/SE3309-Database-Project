@@ -147,7 +147,7 @@ app.get("/verifylogin" , (req, res) => {
       console.log(err);
     }else {
       if (result[0] != null && result[0].pass == req.query.password) {
-        res.send(result[0].id)
+        res.send(result[0])
       } else {
         res.send(false);
       }
