@@ -36,6 +36,7 @@ class AddProduct extends React.Component {
       //close editor window + pass props to product list
       this.props.close(res.data);
       //console.log(res.data);
+      window.location.reload();
       alert("New Product Added");
     });
   };
@@ -205,7 +206,7 @@ class AddProduct extends React.Component {
                 className="button"
                 type="button"
                 onClick={() => {
-                  this.props.close("AddInven data");
+                  this.props.close();
                 }}
               >
                 Cancel

@@ -8,7 +8,7 @@ class PopupEditor extends React.Component {
     on: false,
     //initial state doesn't carry child component
     component: null,
-    callback: () => {}
+    callback: () => {},
   };
 
   //open method
@@ -35,16 +35,26 @@ class PopupEditor extends React.Component {
   //   });
   // };
 
-  open = options => {
+  open = (
+    options = {
+      props: {},
+      component: null,
+      callback: () => {}
+    }
+  ) => {
     const { props, component, callback } = options;
-    const newComponent = React.createElement(component, { close: this.close});
+    const popupKey = new Date().getTime();
+    const newComponent = React.createElement(component, {
+      ...props, //destructure
+      close: this.close,
+      key: popupKey,
+    });
     this.setState({
       on: true,
       component: newComponent,
       callback: callback,
-    })
-
-  }
+    });
+  };
 
   //close method
   close = (data) => {
