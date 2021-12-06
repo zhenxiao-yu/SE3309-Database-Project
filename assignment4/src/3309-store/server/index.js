@@ -50,8 +50,11 @@ app.get("/ads", (req, res) => {
     } else {
       res.send(result);
     }
-  );
+  });
+
+
 });
+
 
 //return list of all products in reverse order
 app.get("/products", (req, res) => {
@@ -126,14 +129,10 @@ app.get("/verifylogin", (req, res) => {
       if (result[0] != null && result[0].pass == req.query.password) {
         res.send(result[0])
       } else {
-        if (result[0] != null && result[0].pass == req.query.password) {
-          res.send(result[0]);
-        } else {
-          res.send(false);
-        }
+        res.send(false);
       }
     }
-  );
+  });
 });
 
 //get all products in order history given a userid
