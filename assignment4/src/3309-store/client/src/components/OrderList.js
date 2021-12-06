@@ -45,23 +45,23 @@ class OrderList extends React.Component {
     }
 }
 
-render() {
-    return (
-        <div className="products-container">
-            <div className="columns is-multiline is-desktop">
-                {this.state.products.map((product) => {
-                    console.log(product.id + " " + product.userID + " ");
-                    return (
-                        // each column is 3 slots, thus 4 products per line
-                        <div className="column is-3" key={product.id}>
-                            <ProductItem product={product} />
-                        </div>
-                    );
-                })}
-            </div>
-        </div>
-    );
-}
-}
+// render() {
+//     return (
+//         <div className="products-container">
+//             <div className="columns is-multiline is-desktop">
+//                 {this.state.products.map((product) => {
+//                     console.log(product.id + " " + product.userID + " ");
+//                     return (
+//                         // each column is 3 slots, thus 4 products per line
+//                         <div className="column is-3" key={product.id}>
+//                             <ProductItem product={product} />
+//                         </div>
+//                     );
+//                 })}
+//             </div>
+//         </div>
+//     );
+// }
+// }
 
 export default OrderList;
