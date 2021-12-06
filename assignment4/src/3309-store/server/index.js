@@ -47,8 +47,8 @@ app.get("/ads", (req, res) => {
   db.query(`SELECT p.* FROM Product p, TargetedAdvertisement ta WHERE ta.userID = ${req.query.userID} AND ta.prodID = p.id  AND p.prodStatus <> "Out of Stock"`, (err, result) => {
     if (err) {
       console.log(err);
-    }else {
-      res.send (result);
+    } else {
+      res.send(result);
     }
   });
 
@@ -141,16 +141,28 @@ app.put("/updateproduct:id", (req, res) => {
   );
 });
 
-app.get("/verifylogin" , (req, res) => {
+//verify that the given username and password are correct
+app.get("/verifylogin", (req, res) => {
   db.query(`SELECT id, pass FROM AllAccount WHERE username = "${req.query.username}"`, (err, result) => {
     if (err) {
       console.log(err);
-    }else {
+    } else {
       if (result[0] != null && result[0].pass == req.query.password) {
         res.send(result[0])
       } else {
         res.send(false);
       }
+    }
+  });
+});
+
+//get all cart items from a given user id
+app.get("/cart", (req, res) => {
+  db.query(`SELECT p.* FROM Product p, CartItem ci WHERE ci.userID = ${req.query.userID} AND ci.prodID = p.id;`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
     }
   });
 });

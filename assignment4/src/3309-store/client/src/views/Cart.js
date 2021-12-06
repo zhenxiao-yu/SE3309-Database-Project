@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "components/Header";
+import CartItemList from "components/CartItemList";
 
 
 //Cart component
@@ -8,7 +9,7 @@ class Cart extends React.Component {
     return (
       <div className="App-container">
         <Header username="" />
-       <h1>Cart</h1>
+       <CartItemList/>
       </div>
     );
   }
