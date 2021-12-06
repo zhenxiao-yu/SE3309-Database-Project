@@ -123,7 +123,7 @@ app.put("/updateproduct/:id", (req, res) => {
   const viewCount = req.body.viewCount;
   const category = req.body.category;
   let sql = `UPDATE product SET prodName = ?, sellerID = ?, subtitle = ?, image = ?, descr = ?, price = ?, stock =?, prodStatus = ?, viewCount = ?, category = ? WHERE id = ?`;
-  db.query(sql, [prodName, sellerID, subtitle, image, descr, price, stock, prodStatus, viewCount, category, productID], (err, result)=> {
+  db.query(sql, [prodName, sellerID, subtitle, image, descr, price, stock, prodStatus, viewCount, category, productID], (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -174,6 +174,17 @@ app.get("/orderInfo", (req, res) => {
     }
   });
 });
+
+//add ordered products to cart given an order id
+app.get("/addOrderCart", (req, res) => {
+  db.query(`INSERT INTO CartItem (userID,prodID,purchaseAmount) (SELECT ${req.query.userID}, prodID, purchaseAmount FROM OrderItem WHERE orderID = ${req.query.orderNum})`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("values are properly inserted");
+    }
+  });
+})
 
 //get all cart items from a given user id
 app.get("/cart", (req, res) => {
