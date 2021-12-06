@@ -13,7 +13,7 @@ const Header = (props) => {
           {/* redirect to user's Wishlist */}
           <a href="/">Wishlist</a>
           {/* redirect to user's Order*/}
-          <a href="/">Orders</a>
+          <a href="/orders">Orders</a>
           {/* redirect to user's Payment info */}
           <a href="/">Payment</a>
         </div>

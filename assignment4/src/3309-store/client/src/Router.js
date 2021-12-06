@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from "views/App";
 import Login from "views/Login";
 import InvalidPath from "views/InvalidPath";
+import Orders from "views/Orders"
 
 //router component for switching between pages (views)
 const Router = () => (
@@ -19,6 +20,9 @@ const Router = () => (
 
       {/* redirect to shopping cart page */}
       {/* <Route path="/cart" component={Cart} /> */}
+
+      {/* redirect to orders page */}
+      <Route path="/orders" component={Orders} />
 
       {/* redirect to NO MATCH page */}
       <Route component={InvalidPath} />
