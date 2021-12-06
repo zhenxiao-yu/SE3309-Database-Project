@@ -22,7 +22,7 @@ app.use(cors());
 //setup db connection
 const db = mysql.createConnection({
   //your db credentials
-  user: "root",
+  user: "sqluser",
   host: "localhost",
   password: "615615",
   database: "se3309",
@@ -129,6 +129,28 @@ app.put("/updateproduct/:id", (req, res) => {
   });
 });
 
+<<<<<<< HEAD
+// GET all products in specified category 
+app.get('/filter-products/',(req, res)=>{
+  // Using a query string 
+  // Example: .../filter-products/?category=category 1
+  // Retrieve query string 
+  let category = req.query;
+  category = category['category'];
+  // Query to get all products in specified category 
+  try{
+   db.query(`SELECT * FROM ecommerce.product WHERE category="${category}"`,(err, result)=>{
+     res.send(result);
+   });
+  }catch(err){
+    if(err){
+      res.send(err);
+    }
+  }
+  
+})
+
+=======
 //verify that the given username and password are correct
 app.get("/verifylogin", (req, res) => {
   db.query(
@@ -283,4 +305,5 @@ app.post("/addOrder", (req, res) => {
   );
 });
 
+>>>>>>> main
 // app.delete()

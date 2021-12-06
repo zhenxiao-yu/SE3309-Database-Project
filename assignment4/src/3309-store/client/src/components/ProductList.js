@@ -15,7 +15,10 @@ class ProductList extends React.Component {
     products: [],
     // stores the entire product list from database
     originalProducts: [],
-    productAds: []
+    productAds: [],
+    cartAmount: 0,
+    filter: "none",
+    filteredProducts: []
   };
 
 
@@ -101,14 +104,35 @@ class ProductList extends React.Component {
       originalProducts: tempOrigProducts
     });
   };
+  // Handle callback to retrieve state from CategoryList component
+  handleCategory(data){
+    // Sets the filter state
+    // Component will know which API call to make 
+    this.setState({
+      filter:data
+    });
+  }
+
+  // Make call to backend and render the products 
+  renderFilteredProducts(filter){
+    // Use prop categoryName to send the current category name 
+    axios.get(`http://localhost:3001/filter-products/?category=${filter}`).then((response)=>{
+      // Set new array state with received JSON responses
+      this.setState({
+        filteredProducts: response.data
+      });
+    });
+  }
 
   render() {
     return (
       <div>
         {/* pass search function to productList Header (contains search button) */}
         <ProductListHeader search={this.search} />
-        <CategoryList />
+        <CategoryList callback={this.handleCategory.bind(this)}/>
 
+        {/* START HERE FOR STATE CHANGE */}
+        {this.state.filter == 'none'?
         <div className="products-container">
           <button
             className="button is-danger popup-btn"
@@ -141,6 +165,23 @@ class ProductList extends React.Component {
             })}
           </div>
         </div>
+        :
+        <div className="products-container">
+          <div className="columns is-multiline is-desktop">
+          {this.renderFilteredProducts(this.state.filter)}
+          {/* iterate through all products */}
+          {this.state.filteredProducts.map((product) => {
+                return (
+                  // each column is 3 slots, thus 4 products per line
+                  <div className="column is-3" key={product.id}>
+                    <ProductItem product={product} />
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+          }
+        {/* END HERE FOR STATE CHANGE */}
       </div>
     );
   }
