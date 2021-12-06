@@ -69,8 +69,10 @@ class ProductList extends React.Component {
 
   //add product method 
   add = product => {
+    //new product list
     const _products = [...this.state.products];
     _products.push(product);
+    //new source product list
     const _sProducts = [...this.state.originalProducts];
     _sProducts.push(product);
 
