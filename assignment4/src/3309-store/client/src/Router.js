@@ -4,6 +4,7 @@ import App from "views/App";
 import Login from "views/Login";
 import InvalidPath from "views/InvalidPath";
 import Orders from "views/Orders"
+import Cart from "views/Cart"
 
 //router component for switching between pages (views)
 const Router = () => (
@@ -19,7 +20,7 @@ const Router = () => (
       {/* <Route path="/register" component={Register} /> */}
 
       {/* redirect to shopping cart page */}
-      {/* <Route path="/cart" component={Cart} /> */}
+      <Route path="/cart" component={Cart} />
 
       {/* redirect to orders page */}
       <Route path="/orders" component={Orders} />

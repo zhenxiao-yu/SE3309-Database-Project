@@ -55,7 +55,7 @@ class ProductListHeader extends React.Component {
         {/* shopping cart */}
         <div className="cart-div">
           {/* icon */}
-          <a href ="/orders">
+          <a href ="/cart">
           <button><i className="fa fa-shopping-cart"></i></button>
           {/* current number of items in cart */}
           <span className="cart-amount"></span>
