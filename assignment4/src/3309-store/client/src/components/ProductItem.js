@@ -14,6 +14,10 @@ class ProductItem extends React.Component {
       },
       callback: (data) => {
         console.log(data);
+        if (data) {
+          //this.props.edit(data);
+          window.location.reload();
+        }
       },
     });
   };

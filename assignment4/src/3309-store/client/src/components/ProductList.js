@@ -15,8 +15,7 @@ class ProductList extends React.Component {
     products: [],
     // stores the entire product list from database
     originalProducts: [],
-    productAds: [],
-    cartAmount: 0
+    productAds: []
   };
 
 
@@ -62,9 +61,9 @@ class ProductList extends React.Component {
       component: AddProduct,
       callback: data => {
         //when the data is not empty, add new data to a list of products
-        console.log(data)
         if (data) {
-          this.add(data);
+          //this.add(data);
+          window.location.reload();
         }
         console.log(data);
       },
@@ -74,15 +73,32 @@ class ProductList extends React.Component {
   //add product method 
   add = product => {
     //new product list
-    const _products = [...this.state.products];
-    _products.push(product);
+    const tempProducts = [...this.state.products];
+    tempProducts.push(product);
     //new source product list
-    const _sProducts = [...this.state.originalProducts];
-    _sProducts.push(product);
+    const tempOrigProducts = [...this.state.originalProducts];
+    tempOrigProducts.push(product);
 
     this.setState({
-      products: _products,
-      originalProducts: _sProducts
+      products: tempProducts,
+      originalProducts: tempOrigProducts
+    });
+  };
+
+  //edit product method 
+  edit = product => {
+    //new product list
+    const tempProducts = [...this.state.products];
+    const tempIndex = tempProducts.findIndex(p => p.id === product.id)
+    tempProducts.splice(tempIndex,1, product)
+
+    //new source product list
+    const tempOrigProducts = [...this.state.originalProducts];
+    const tempOrigIndex = tempProducts.findIndex(p => p.id === product.id)
+    tempOrigProducts.splice(tempOrigIndex,1, product)
+    this.setState({
+      products: tempProducts,
+      originalProducts: tempOrigProducts
     });
   };
 
@@ -104,12 +120,12 @@ class ProductList extends React.Component {
           <div className="columns is-multiline is-desktop">
 
             {/* iterate through the advertisements */}
-            {this.state.productAds.map((ad) => {
+            {this.state.productAds.map((p) => {
               return (
                 // each column is 3 slots, thus 4 products per line
-                <div className="column is-3" key={ad.id}>
+                <div className="column is-3" key={p.id}>
                   <h1>Promoted</h1>
-                  <ProductItem product={ad} />
+                  <ProductItem product={p} update={this.edit}/>
                 </div>
               );
             })}

@@ -230,6 +230,9 @@ class EditProduct extends React.Component {
             <div className="control">
               <button className="button is-link">Submit</button>
             </div>
+            <div className="control">
+              <button className="button is-danger">Delete</button>
+            </div>
             {/* Close Button */}
             <div className="control">
               <button
