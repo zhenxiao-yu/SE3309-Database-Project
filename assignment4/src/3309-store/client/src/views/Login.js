@@ -1,5 +1,4 @@
 import React from "react";
-import loginInfo from "../variables/loginInfo.js";
 import axios from "utils/axios";
 
 
@@ -23,8 +22,11 @@ class Login extends React.Component {
 
     axios.get(`http://localhost:3001/verifylogin?username=${username}&password=${password}`).then((res) => {
       if (res.data) {
+        localStorage.setItem("username", username);
+        localStorage.setItem("userID", res.data.id);
+        /*
         loginInfo.username = username;
-        loginInfo.id = res.data.id;
+        loginInfo.id = res.data.id;*/
         this.props.history.push('/');
       } else {
         this.setState ({
@@ -38,7 +40,7 @@ class Login extends React.Component {
     return (
       <div className="login-container">
         <form className="box login-window" onSubmit={this.handleLogin}>
-          <h4 className="title is-4">Please Login First.</h4>
+          <h4 className="title is-4">Login.</h4>
           {
           this.state.failedLogin? <h3 style={{ color: 'red' }}>Incorrect username or password</h3> : ""
           }

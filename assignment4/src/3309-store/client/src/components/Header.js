@@ -1,5 +1,4 @@
 import React from "react";
-import loginInfo from "../variables/loginInfo.js";
 
 // Header component
 const Header = (props) => {
@@ -21,11 +20,17 @@ const Header = (props) => {
         <div className="nav-right">
           {/* render username when logged in */}
           {/* render register/login button when logged out */}
-          {loginInfo.username ? (
-            <span className="username">
-              <i className="fa fa-user"></i>
-              {loginInfo.username}
-            </span>
+          {localStorage.getItem("username") ? (
+            <React.Fragment>
+              <a href="/login">change user</a>
+
+              <span className="username">
+                <i className="fa fa-user"></i>
+                {localStorage.getItem("username")}
+              </span>
+            </React.Fragment>
+
+
           ) : (
             <React.Fragment>
               {/* redirect to login page */}
