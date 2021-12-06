@@ -5,7 +5,6 @@ import CategoryList from "components/CategoryList";
 import axios from "utils/axios";
 import PopupEditor from "components/PopupEditor";
 import AddProduct from "components/AddProduct";
-import loginInfo from "../variables/loginInfo.js";
 
 
 //ProductList component
@@ -23,8 +22,8 @@ class ProductList extends React.Component {
 
   //fetch data from server
   componentDidMount() {
-    if (loginInfo.username) {
-      axios.get(`http://localhost:3001/ads?userID=${loginInfo.id}`).then((res) => {
+    if (localStorage.getItem("username")) {
+      axios.get(`http://localhost:3001/ads?userID=${localStorage.getItem("userID")}`).then((res) => {
         this.setState({
           productAds: res.data.slice(0, 4),
         });
