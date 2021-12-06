@@ -4,29 +4,38 @@ import OrderList from "./OrderList";
 
 class OrderHeader extends React.Component {
 
+    state = {
+        orderDate: []
+    };
     //fetch data from server
     componentDidMount() {
         if (localStorage.getItem("username")) {
-            axios.get(`http://localhost:3001/orderInfo?userID=${localStorage.getItem("userID")}`).then((res) => {
-                this.props({
-                    orderNum: res.data.orderID,
-                    orderDate: res.data.createTime
+            axios.get(`http://localhost:3001/orderDate?userID=${localStorage.getItem("userID")}`).then((res) => {
+                this.setState({
+                    orderDate: res.data
+
                 });
             });
-
         }
     }
 
-    render() {
-        const {
-            orderNo,
-            orderDate
-        } = this.props.order
+    addDropDown = () => {
+        let list = [];
+        return list;
+    }
 
+
+    render() {
         return (
-            <div className="order-banner">
-                <div className="order-num">{orderNo}</div>
-                <div className="order-date">{orderDate}</div>
+            <div>
+                <div className="order-banner">
+                    <div className="order-num">Product Order History</div>
+                    <div className="order-date">
+                        Order again from:
+                        
+                        <button>Add to Cart</button>
+                    </div>
+                </div>
             </div>
         )
     }

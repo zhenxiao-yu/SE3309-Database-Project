@@ -158,7 +158,18 @@ app.get("/verifylogin", (req, res) => {
 
 //get all products in order history given a userid
 app.get("/orderItems", (req, res) => {
-  db.query(`SELECT * FROM Product WHERE Product.id IN (SELECT prodID FROM Orders JOIN Orderitem ON Orders.userID = "${req.query.userID}" AND "${req.query.orderID}" = Orderitem.orderID)`, (err, result) => {
+  db.query(`SELECT * FROM Product WHERE Product.id IN (SELECT prodID FROM Orders JOIN Orderitem ON Orders.userID = "${req.query.userID}" AND Orders.id = Orderitem.orderID)`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//get order date given a userid
+app.get("/orderDate", (req, res) => {
+  db.query(`SELECT DISTINCT createTime from Orders JOIN Orderitem ON (Orders.id = Orderitem.orderID) WHERE Orders.userID = "${req.query.userID}"`, (err, result) => {
     if (err) {
       console.log(err);
     } else {
