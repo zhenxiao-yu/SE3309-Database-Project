@@ -38,8 +38,10 @@ class CategoryList extends React.Component {
               </div>
             </div>
           </div>
-        );
-      }
+        </div>
+      </div>
+    );
+  }
 }
 
 export default CategoryList;

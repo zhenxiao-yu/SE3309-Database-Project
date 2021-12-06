@@ -12,7 +12,7 @@ const Header = (props) => {
           {/* redirect to user's Wishlist */}
           <a href="/">Wishlist</a>
           {/* redirect to user's Order*/}
-          <a href="/">Orders</a>
+          <a href="/orders">Orders</a>
           {/* redirect to user's Payment info */}
           <a href="/">Payment</a>
         </div>
@@ -20,11 +20,17 @@ const Header = (props) => {
         <div className="nav-right">
           {/* render username when logged in */}
           {/* render register/login button when logged out */}
-          {props.username ? (
-            <span className="username">
-              <i className="fa fa-user"></i>
-              {props.username}
-            </span>
+          {localStorage.getItem("username") ? (
+            <React.Fragment>
+              <a href="/login">change user</a>
+
+              <span className="username">
+                <i className="fa fa-user"></i>
+                {localStorage.getItem("username")}
+              </span>
+            </React.Fragment>
+
+
           ) : (
             <React.Fragment>
               {/* redirect to login page */}

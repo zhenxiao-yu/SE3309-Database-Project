@@ -13,8 +13,8 @@ class AddProduct extends React.Component {
     price: "",
     stock: "",
     prodStatus: "Normal",
-    viewCount: "",
-    category: "",
+    viewCount: "0",
+    category: "Category",
   };
 
   handleChange = (event) => {
@@ -35,7 +35,9 @@ class AddProduct extends React.Component {
     axios.post("http://localhost:3001/newproduct", product).then((res) => {
       //close editor window + pass props to product list
       this.props.close(res.data);
-      alert("new product added");
+      //console.log(res.data);
+      window.location.reload();
+      alert("New Product Added");
     });
   };
 

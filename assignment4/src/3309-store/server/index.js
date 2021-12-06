@@ -24,8 +24,8 @@ const db = mysql.createConnection({
   //your db credentials
   user: "sqluser",
   host: "localhost",
-  password: "password",
-  database: "ecommerce",
+  password: "615615",
+  database: "se3309",
 });
 
 //connect
@@ -47,13 +47,14 @@ app.get("/ads", (req, res) => {
   db.query(`SELECT p.* FROM Product p, TargetedAdvertisement ta WHERE ta.userID = ${req.query.userID} AND ta.prodID = p.id  AND p.prodStatus <> "Out of Stock"`, (err, result) => {
     if (err) {
       console.log(err);
-    }else {
-      res.send (result);
+    } else {
+      res.send(result);
     }
   });
 
 
 });
+
 
 //return list of all products in reverse order
 app.get("/products", (req, res) => {
@@ -105,32 +106,10 @@ app.post("/newproduct", (req, res) => {
   );
 });
 
-app.put("/updateproduct:id", (req, res) => {
-  const id = req.body.id;
-  const prodName = req.body.prodName;
-  const sellerID = req.body.sellerID;
-  const subtitle = req.body.subtitle;
-  const image = req.body.image;
-  const descr = req.body.descr;
-  const price = req.body.price;
-  const stock = req.body.stock;
-  const prodStatus = req.body.prodStatus;
-  const viewCount = req.body.viewCount;
-  const category = req.body.category;
+//update product
+app.put("/updateproduct", (req, res) => {
   db.query(
-    "UPDATE SET product (prodName,sellerID,subtitle,image,descr,price,stock,prodStatus,viewCount,category) = (?,?,?,?,?,?,?,?,?,?,?) WHERE id = ?",
-    [
-      prodName,
-      sellerID,
-      subtitle,
-      image,
-      descr,
-      price,
-      stock,
-      prodStatus,
-      viewCount,
-      category,
-    ],
+    `UPDATE product SET id="${req.body.id}", prodName="${req.body.prodName}",sellerID="${req.body.sellerID}",subtitle="${req.body.subtitle}",image="${req.body.image}",descr="${req.body.descr}",price="${req.body.price}",stock="${req.body.id}",prodStatus="${req.body.id}",viewCount="${req.body.viewCount}",category="${req.body.category}") WHERE id = "${req.body.id}"`,
     (err, result) => {
       if (err) {
         console.log(err);
@@ -141,6 +120,7 @@ app.put("/updateproduct:id", (req, res) => {
   );
 });
 
+<<<<<<< HEAD
 // GET all products in specified category 
 app.get('/filter-products/',(req, res)=>{
   // Using a query string 
@@ -161,4 +141,142 @@ app.get('/filter-products/',(req, res)=>{
   
 })
 
+=======
+//verify that the given username and password are correct
+app.get("/verifylogin", (req, res) => {
+  db.query(`SELECT id, pass FROM AllAccount WHERE username = "${req.query.username}"`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (result[0] != null && result[0].pass == req.query.password) {
+        res.send(result[0])
+      } else {
+        res.send(false);
+      }
+    }
+  });
+});
+
+//get all products in order history given a userid
+app.get("/orderItems", (req, res) => {
+  db.query(`SELECT * FROM Product WHERE Product.id IN (SELECT prodID FROM Orders JOIN Orderitem ON Orders.userID = "${req.query.userID}" AND Orders.id = Orderitem.orderID)`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+
+//get all cart items from a given user id
+app.get("/cart", (req, res) => {
+  db.query(`SELECT p.* FROM Product p, CartItem ci WHERE ci.userID = ${req.query.userID} AND ci.prodID = p.id`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//add to cart given user id, product id
+app.get("/addToCart", (req, res) => {
+  db.query(`INSERT INTO CartItem(userID, prodID, purchaseAmount) VALUES (${req.query.userID}, ${req.query.prodID}, 1)`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("values are properly inserted");
+    }
+  });
+});
+
+//remove a cart item given user id, product id
+app.get("/removeCartItem", (req, res) => {
+  db.query(`DELETE FROM CartItem WHERE userID = ${req.query.userID} AND prodID = ${req.query.prodID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("values are properly removed");
+    }
+  });
+});
+
+//get list of payment methods and ids
+app.get("/paymentInfo", (req, res) => {
+  db.query(`SELECT id, paymentMethod FROM PaymentInfo WHERE userID = ${req.query.userID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//get list of shipping infos and ids
+app.get("/shippingInfo", (req, res) => {
+  db.query(`SELECT id, recipientAddress FROM ShippingInfo WHERE userID = ${req.query.userID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.post("/addOrder", (req, res) => {
+  db.query(`INSERT INTO OrderStatus(userID) VALUES (${req.body.userID})`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+
+      db.query(`SELECT LAST_INSERT_ID() AS id`, (err2, result2) => {
+        if (err2) {
+          console.log(err2);
+        } else {
+          db.query(`INSERT INTO Orders(userID, statusID, paymentID, shippingID) VALUES(${req.body.userID}, ${result2[0].id}, ${req.body.paymentID}, ${req.body.shippingID})`, (err3, result3) => {
+            if (err3) {
+              console.log(err3);
+            } else {
+
+              db.query(`SELECT LAST_INSERT_ID() AS id`, (err4, result4) => {
+                if (err4) {
+                  console.log(err4);
+                } else {
+
+                  db.query(`INSERT INTO OrderItem(orderID, prodID, purchaseAmount) SELECT ${result4[0].id}, prodID, 1 FROM CartItem WHERE userID = ${req.body.userID}`, (err4, result4) => {
+                    if (err4) {
+                      console.log(err4);
+                    } else {
+                      db.query(`DELETE FROM CartItem WHERE userID = ${req.body.userID}`, (err5, result5) => {
+                        if (err5) {
+                          console.log(err5);
+                        } else {
+                          res.send("values are properly inserted");
+    
+                        }
+                      });
+
+                    }
+                  });
+
+
+                }
+              });
+
+
+            }
+          });
+
+
+        }
+      });
+
+
+    }
+  });
+})
+
+
+>>>>>>> main
 // app.delete()

@@ -1,40 +1,21 @@
 import React from "react";
-import PopupEditor from "components/PopupEditor";
-import EditProduct from "components/EditProduct";
 import axios from "utils/axios";
-import { withRouter } from "react-router-dom";
 
-class ProductItem extends React.Component {
+class CartItem extends React.Component {
   //open  product editor window method
-  editProduct = () => {
-    PopupEditor.open({
-      component: EditProduct,
-      props: {
-        product: this.props.product,
-      },
-      callback: (data) => {
-        console.log(data);
-      },
-    });
-  };
+  numChanged = () => {};
 
-  //add item to the cart
-  addToCart = () => {
-    if (localStorage.getItem("username")) {
-      axios
-        .get(
-          `http://localhost:3001/addToCart?userID=${localStorage.getItem(
-            "userID"
-          )}&prodID=${this.props.product.id}`
-        )
-        .then((res) => {
-          console.log(res.data);
-          alert("product added to cart");
-        });
-    } else {
-      //user is not logged in
-      this.props.history.push("/login");
-    }
+  removeItem = () => {
+    axios
+      .get(
+        `http://localhost:3001/removeCartItem?userID=${localStorage.getItem(
+          "userID"
+        )}&prodID=${this.props.product.id}`
+      )
+      .then((res) => {
+        console.log(res.data);
+        window.location.reload(false);
+      });
   };
 
   render() {
@@ -76,13 +57,13 @@ class ProductItem extends React.Component {
         {/* details/info about the product */}
         <div className="item-content">
           {/* edit button */}
-          <div
-            className="item-header has-text-right"
-            onClick={this.editProduct}
-          >
-            <span className="icon edit-button">
-              <i class="fa-solid fa-sliders"></i>
-            </span>
+          <div className="item-header has-text-right" onClick={this.numChanged}>
+            <select name="#" id="#">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
           </div>
           <div className="item-img-container">
             <div className="on-sale-label">On Sale!</div>
@@ -115,12 +96,7 @@ class ProductItem extends React.Component {
             <span>{price}</span>
           </p>
           {/* add to cart button*/}
-          <button
-            className="item-btn"
-            disabled={statusConverter(prodStatus) === "unavailable"}
-            onClick={this.addToCart}
-          >
-            <i className="fas fa-shopping-cart"></i>
+          <button className="remove-btn" onClick={this.removeItem}>
             {/* show cancel icon when out of stock */}
             <i className="fas fa-cancel"></i>
           </button>
@@ -130,4 +106,4 @@ class ProductItem extends React.Component {
   }
 }
 
-export default withRouter(ProductItem);
+export default CartItem;

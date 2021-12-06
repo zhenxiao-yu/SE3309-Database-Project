@@ -12,9 +12,9 @@ class EditProduct extends React.Component {
     descr: "",
     price: "",
     stock: "",
-    prodStatus: "Normal",
-    viewCount: "",
-    category: "",
+    prodStatus: "",
+    viewCount: "0",
+    category: "Category",
   };
 
   //render existing product info on mount
@@ -61,12 +61,12 @@ class EditProduct extends React.Component {
     e.preventDefault();
     // get product info from add new product form
     const product = { ...this.state };
-    console.log(this.state.id);
     //send product information to server
+    console.log(product);
     axios
-      .put(`http://localhost:3001/updateproduct/`, product)
+      .put(`http://localhost:3001/updateproduct`, product)
       .then((res) => {
-        console.log(res.data);
+        this.props.close(res.data);
         alert("product edited");
       });
   };
@@ -84,7 +84,7 @@ class EditProduct extends React.Component {
                 type="number"
                 className="input"
                 name="id"
-                value={this.state.name}
+                value={this.state.id}
                 onChange={this.handleChange}
               />
             </div>
@@ -97,7 +97,7 @@ class EditProduct extends React.Component {
                 type="number"
                 className="input"
                 name="sellerID"
-                value={this.state.name}
+                value={this.state.sellerID}
                 onChange={this.handleChange}
               />
             </div>
@@ -110,7 +110,7 @@ class EditProduct extends React.Component {
                 type="text"
                 className="input"
                 name="prodName"
-                value={this.state.name}
+                value={this.state.prodName}
                 onChange={this.handleChange}
               />
             </div>
@@ -123,7 +123,7 @@ class EditProduct extends React.Component {
                 type="number"
                 className="input"
                 name="stock"
-                value={this.state.name}
+                value={this.state.stock}
                 onChange={this.handleChange}
               />
             </div>
@@ -136,7 +136,7 @@ class EditProduct extends React.Component {
                 type="number"
                 className="input"
                 name="price"
-                value={this.state.name}
+                value={this.state.price}
                 onChange={this.handleChange}
               />
             </div>
@@ -149,7 +149,7 @@ class EditProduct extends React.Component {
                 type="text"
                 className="input"
                 name="category"
-                value={this.state.name}
+                value={this.state.category}
                 onChange={this.handleChange}
               />
             </div>
@@ -162,7 +162,7 @@ class EditProduct extends React.Component {
                 type="text"
                 className="input"
                 name="viewCount"
-                value={this.state.name}
+                value={this.state.viewCount}
                 onChange={this.handleChange}
               />
             </div>
@@ -174,7 +174,7 @@ class EditProduct extends React.Component {
               <textarea
                 className="textarea"
                 name="image"
-                value={this.state.name}
+                value={this.state.image}
                 onChange={this.handleChange}
               />
             </div>
@@ -187,7 +187,7 @@ class EditProduct extends React.Component {
                 type="text"
                 className="input"
                 name="subtitle"
-                value={this.state.name}
+                value={this.state.subtitle}
                 onChange={this.handleChange}
               />
             </div>
@@ -199,7 +199,7 @@ class EditProduct extends React.Component {
               <textarea
                 className="textarea"
                 name="descr"
-                value={this.state.name}
+                value={this.state.descr}
                 onChange={this.handleChange}
               />
             </div>
@@ -211,12 +211,12 @@ class EditProduct extends React.Component {
               <div className="select is-fullwidth">
                 <select
                   name="prodStatus"
-                  value={this.state.name}
+                  value={this.state.prodStatus}
                   onChange={this.handleChange}
                 >
-                  <option>normal</option>
-                  <option>onsale</option>
-                  <option>unavailable</option>
+                  <option>Normal</option>
+                  <option>On Sale</option>
+                  <option>Out Of Stock</option>
                 </select>
               </div>
             </div>
