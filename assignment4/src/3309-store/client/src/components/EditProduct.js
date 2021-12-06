@@ -61,12 +61,12 @@ class EditProduct extends React.Component {
     e.preventDefault();
     // get product info from add new product form
     const product = { ...this.state };
-    console.log(this.state.id);
     //send product information to server
+    console.log(product);
     axios
-      .put(`http://localhost:3001/updateproduct/`, product)
+      .put(`http://localhost:3001/updateproduct`, product)
       .then((res) => {
-        console.log(res.data);
+        this.props.close(res.data);
         alert("product edited");
       });
   };
