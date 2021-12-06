@@ -1,6 +1,10 @@
 import React from "react";
 import PopupEditor from "components/PopupEditor";
 import EditProduct from "components/EditProduct";
+import axios from "utils/axios";
+import { withRouter } from "react-router-dom";
+
+
 
 class ProductItem extends React.Component {
   //open  product editor window method
@@ -15,6 +19,20 @@ class ProductItem extends React.Component {
       },
     });
   };
+
+  //add item to the cart
+  addToCart = () => {
+    if (localStorage.getItem("username")) {
+      axios.get(`http://localhost:3001/addToCart?userID=${localStorage.getItem("userID")}&prodID=${this.props.product.id}`).then((res) => {
+        console.log(res.data);
+        alert("product added to cart");
+      });
+    } else {  //user is not logged in
+      this.props.history.push('/login');
+
+    }
+
+  }
 
   render() {
     //   destructure props
@@ -91,7 +109,7 @@ class ProductItem extends React.Component {
             <span>{price}</span>
           </p>
           {/* add to cart button*/}
-          <button className="item-btn" disabled={statusConverter(prodStatus) === "unavailable"}>
+          <button className="item-btn" disabled={statusConverter(prodStatus) === "unavailable"} onClick={this.addToCart}>
             <i className="fas fa-shopping-cart"></i>
             {/* show cancel icon when out of stock */}
             <i className="fas fa-cancel"></i>
@@ -102,4 +120,4 @@ class ProductItem extends React.Component {
   }
 }
 
-export default ProductItem;
+export default withRouter(ProductItem);
