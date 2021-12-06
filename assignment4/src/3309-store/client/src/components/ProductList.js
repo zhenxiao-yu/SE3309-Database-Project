@@ -6,13 +6,6 @@ import axios from "utils/axios";
 import PopupEditor from "components/PopupEditor";
 import AddProduct from "components/AddProduct";
 
-/*
-  - State for the whole product display --> unfiltered or filtered
-  - When unfiltered we display everything as usual
-  - When filtered we need to only display the specified products 
-  - For state change, we can use a ternary condition to check state
-*/
-
 //ProductList component
 class ProductList extends React.Component {
   //product list state
@@ -91,6 +84,8 @@ class ProductList extends React.Component {
   };
   // Handle callback to retrieve state from CategoryList component
   handleCategory(data){
+    // Sets the filter state
+    // Component will know which API call to make 
     this.setState({
       filter:data
     });
@@ -100,8 +95,10 @@ class ProductList extends React.Component {
   renderFilteredProducts(filter){
     // Use prop categoryName to send the current category name 
     axios.get(`http://localhost:3001/filter-products/?category=${filter}`).then((response)=>{
-      // Returns JSON in web console
-      console.log(response.data);
+      // Set new array state with received JSON responses
+      this.setState({
+        filteredProducts: response.data
+      });
     });
   }
 
@@ -147,18 +144,20 @@ class ProductList extends React.Component {
           </div>
         </div>
         :
-        <>
-        {this.renderFilteredProducts(this.state.filter)}
-        {/* iterate through all products */}
-        {/*this.state.products.map((product) => {
-              return (
-                // each column is 3 slots, thus 4 products per line
-                <div className="column is-3" key={product.id}>
-                  <ProductItem product={product} />
-                </div>
-              );
-            })*/}
-        </>
+        <div className="products-container">
+          <div className="columns is-multiline is-desktop">
+          {this.renderFilteredProducts(this.state.filter)}
+          {/* iterate through all products */}
+          {this.state.filteredProducts.map((product) => {
+                return (
+                  // each column is 3 slots, thus 4 products per line
+                  <div className="column is-3" key={product.id}>
+                    <ProductItem product={product} />
+                  </div>
+                );
+              })}
+          </div>
+        </div>
           }
         {/* END HERE FOR STATE CHANGE */}
       </div>

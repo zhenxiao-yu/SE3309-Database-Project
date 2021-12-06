@@ -148,7 +148,6 @@ app.get('/filter-products/',(req, res)=>{
   // Retrieve query string 
   let category = req.query;
   category = category['category'];
-  console.log(category);
   // Query to get all products in specified category 
   try{
    db.query(`SELECT * FROM ecommerce.product WHERE category="${category}"`,(err, result)=>{
