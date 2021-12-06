@@ -5,6 +5,8 @@ import CategoryList from "components/CategoryList";
 import axios from "utils/axios";
 import PopupEditor from "components/PopupEditor";
 import AddProduct from "components/AddProduct";
+import loginInfo from "../variables/loginInfo.js";
+
 
 //ProductList component
 class ProductList extends React.Component {
@@ -21,11 +23,13 @@ class ProductList extends React.Component {
 
   //fetch data from server
   componentDidMount() {
-    axios.get("http://localhost:3001/ads?userID=70").then((res) => {
-      this.setState({
-        productAds: res.data.slice(0, 4),
+    if (loginInfo.username) {
+      axios.get(`http://localhost:3001/ads?userID=${loginInfo.id}`).then((res) => {
+        this.setState({
+          productAds: res.data.slice(0, 4),
+        });
       });
-    });
+    }
 
     axios.get("http://localhost:3001/products").then((res) => {
       this.setState({
@@ -34,7 +38,7 @@ class ProductList extends React.Component {
       });
     });
 
-    
+
   }
 
   //search for a product
