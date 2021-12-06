@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "components/Header";
 import OrderList from "components/OrderList";
+import OrderHeader from "components/OrderHeader";
 
 //orders  component
 class Orders extends React.Component {
@@ -15,7 +16,7 @@ class Orders extends React.Component {
         return (
             <div className="App-container">
                 <Header username="" />
-                <h1>ORDERS</h1>
+                <OrderHeader />
                 <OrderList />
             </div>
         );

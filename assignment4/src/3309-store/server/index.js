@@ -158,7 +158,7 @@ app.get("/verifylogin", (req, res) => {
 
 //get all products in order history given a userid
 app.get("/orderItems", (req, res) => {
-  db.query(`SELECT * FROM Product WHERE Product.id IN (SELECT prodID FROM Orders JOIN Orderitem ON Orders.userID = "${req.query.userID}" AND Orders.id = Orderitem.orderID)`, (err, result) => {
+  db.query(`SELECT * FROM Product WHERE Product.id IN (SELECT prodID FROM Orders JOIN Orderitem ON Orders.userID = "${req.query.userID}" AND "${req.query.orderID}" = Orderitem.orderID)`, (err, result) => {
     if (err) {
       console.log(err);
     } else {
@@ -167,6 +167,16 @@ app.get("/orderItems", (req, res) => {
   });
 });
 
+//get order information given a userid
+app.get("/orderInfo", (req, res) => {
+  db.query(`(SELECT * FROM Orders JOIN Orderitem ON Orders.userID = "${req.query.userID}" AND Orders.id = Orderitem.orderID) ORDER BY createTime`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
 
 //get all cart items from a given user id
 app.get("/cart", (req, res) => {

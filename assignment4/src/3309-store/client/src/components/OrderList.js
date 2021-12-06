@@ -5,18 +5,19 @@ import axios from "utils/axios";
 class OrderList extends React.Component {
 
     state = {
-        products: []
+        products: [],
+        orderNum:93
     };
 
     //fetch data from server
     componentDidMount() {
         if (localStorage.getItem("username")) {
-            axios.get(`http://localhost:3001/orderItems?userID=${localStorage.getItem("userID")}`).then((res) => {
+            axios.get(`http://localhost:3001/orderItems?userID=${localStorage.getItem("userID")}&orderID=${this.state.orderNum}`).then((res) => {
                 this.setState({
                     products: res.data
                 });
             });
-            
+
         }
 
     }
@@ -26,7 +27,6 @@ class OrderList extends React.Component {
             <div className="products-container">
                 <div className="columns is-multiline is-desktop">
                     {this.state.products.map((product) => {
-                        console.log (product.id + " " + product.userID + " ");
                         return (
                             // each column is 3 slots, thus 4 products per line
                             <div className="column is-3" key={product.id}>

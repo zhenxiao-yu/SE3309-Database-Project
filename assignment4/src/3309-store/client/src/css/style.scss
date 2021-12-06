@@ -92,6 +92,29 @@
 }
 //---------------------------------------------
 
+//OrderHeader----------------------------
+.order-banner {
+  max-width: 1100px;
+  margin: auto;
+  border-bottom: 3px solid #333;
+  padding: 2rem 0.2rem 1.5rem 0.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .order-num {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .order-date{
+    font-size: 1.5rem;
+    color: #333;
+    font-weight:500;
+    text-transform:uppercase;
+  }
+}
+//---------------------------------------------
 
 //ProductListHeader----------------------------
 .products-header {
