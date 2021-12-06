@@ -2,6 +2,8 @@ import React from "react";
 import PopupEditor from "components/PopupEditor";
 import EditProduct from "components/EditProduct";
 import axios from "utils/axios";
+import { withRouter } from "react-router-dom";
+
 
 
 class ProductItem extends React.Component {
@@ -118,4 +120,4 @@ class ProductItem extends React.Component {
   }
 }
 
-export default ProductItem;
+export default withRouter(ProductItem);

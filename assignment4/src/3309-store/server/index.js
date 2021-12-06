@@ -178,4 +178,15 @@ app.get("/addToCart", (req, res) => {
   });
 });
 
+//remove a cart item given user id, product id
+app.get("/removeCartItem", (req, res) => {
+  db.query(`DELETE FROM CartItem WHERE userID = ${req.query.userID} AND prodID = ${req.query.prodID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("values are properly removed");
+    }
+  });
+});
+
 // app.delete()

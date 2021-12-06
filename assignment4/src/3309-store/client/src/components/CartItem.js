@@ -2,6 +2,7 @@ import React from "react";
 import axios from "utils/axios";
 
 
+
 class CartItem extends React.Component {
     //open  product editor window method
     numChanged = () => {
@@ -9,19 +10,10 @@ class CartItem extends React.Component {
     };
 
     removeItem = () => {
-        //todo
-        if (localStorage.getItem("username")) {
-            axios.get(`http://localhost:3001/removeCartITem?userID=${localStorage.getItem("userID")}`).then((res) => {
-                this.setState({
-                    cartItems: res.data
-                });
-            });
-        } else {
-            this.props.history.push('/login');
-
-        }
-
-
+        axios.get(`http://localhost:3001/removeCartItem?userID=${localStorage.getItem("userID")}&prodID=${this.props.product.id}`).then((res) => {
+            console.log(res.data);
+            window.location.reload(false);
+        });
     }
 
     render() {
