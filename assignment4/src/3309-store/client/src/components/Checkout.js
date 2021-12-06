@@ -56,7 +56,7 @@ class Checkout extends React.Component {
                 //close editor window + pass props to product list
                 this.props.close(res.data);
                 //console.log(res.data);
-                alert("Order Created");
+                alert(res.data);
                 window.location.reload(false);
 
             });

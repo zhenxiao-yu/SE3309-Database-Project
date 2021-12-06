@@ -245,37 +245,55 @@ app.get("/shippingInfo", (req, res) => {
 });
 
 app.post("/addOrder", (req, res) => {
-  db.query(`INSERT INTO OrderStatus(userID) VALUES (${req.body.userID})`, (err, result) => {
+  db.query(`START TRANSACTION`, (err, result) => {
     if (err) {
       console.log(err);
     } else {
-
-      db.query(`SELECT LAST_INSERT_ID() AS id`, (err2, result2) => {
-        if (err2) {
-          console.log(err2);
+      db.query(`INSERT INTO OrderStatus(userID) VALUES (${req.body.userID})`, (err, result) => {
+        if (err) {
+          console.log(err);
+          Rollback(res);
         } else {
-          db.query(`INSERT INTO Orders(userID, statusID, paymentID, shippingID) VALUES(${req.body.userID}, ${result2[0].id}, ${req.body.paymentID}, ${req.body.shippingID})`, (err3, result3) => {
-            if (err3) {
-              console.log(err3);
+          db.query(`SELECT LAST_INSERT_ID() AS id`, (err2, result2) => {
+            if (err2) {
+              console.log(err2);
+              Rollback(res);
             } else {
-
-              db.query(`SELECT LAST_INSERT_ID() AS id`, (err4, result4) => {
-                if (err4) {
-                  console.log(err4);
+              db.query(`INSERT INTO Orders(userID, statusID, paymentID, shippingID) VALUES(${req.body.userID}, ${result2[0].id}, ${req.body.paymentID}, ${req.body.shippingID})`, (err3, result3) => {
+                if (err3) {
+                  console.log(err3);
+                  Rollback(res);
                 } else {
 
-                  db.query(`INSERT INTO OrderItem(orderID, prodID, purchaseAmount) SELECT ${result4[0].id}, prodID, 1 FROM CartItem WHERE userID = ${req.body.userID}`, (err4, result4) => {
+                  db.query(`SELECT LAST_INSERT_ID() AS id`, (err4, result4) => {
                     if (err4) {
                       console.log(err4);
+                      Rollback(res);
                     } else {
-                      db.query(`DELETE FROM CartItem WHERE userID = ${req.body.userID}`, (err5, result5) => {
-                        if (err5) {
-                          console.log(err5);
+                      db.query(`INSERT INTO OrderItem(orderID, prodID, purchaseAmount) SELECT ${result4[0].id}, prodID, 1 FROM CartItem WHERE userID = ${req.body.userID}`, (err4, result4) => {
+                        if (err4) {
+                          console.log(err4);
+                          Rollback(res);
                         } else {
-                          res.send("values are properly inserted");
-    
+                          db.query(`DELETE FROM CartItem WHERE userID = ${req.body.userID}`, (err5, result5) => {
+                            if (err5) {
+                              console.log(err5);
+                              Rollback(res);
+                            } else {
+                              db.query(`COMMIT`, (err6, result6) => {
+                                if (err6) {
+                                  console.log(err6);
+                                } else {
+                                  res.send("values are properly inserted");
+                                }
+                              });
+
+                            }
+                          });
+
                         }
                       });
+
 
                     }
                   });
@@ -291,11 +309,22 @@ app.post("/addOrder", (req, res) => {
 
         }
       });
-
-
     }
   });
+
+
+
 })
+
+function Rollback(res) {
+  db.query(`ROLLBACK`, (err6, result6) => {
+    if (err6) {
+      console.log(err6);
+    } else {
+      res.send("ERROR - Rolledback");
+    }
+  });
+}
 
 
 // app.delete()
