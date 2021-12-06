@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "utils/axios";
-import ProductItem from "components/ProductItem";
+import CartItem from "./CartItem";
 
 
 class CartItemList extends React.Component {
@@ -28,13 +28,12 @@ class CartItemList extends React.Component {
         <div className="products-container">
           {/* each line has 12 slots */}
           <div className="columns is-multiline is-desktop">
-
             {/* iterate through the advertisements */}
             {this.state.cartItems.map((item) => {
               return (
                 // each column is 3 slots, thus 4 products per line
                 <div className="column is-3" key={item.id}>
-                  <ProductItem product={item} />
+                  <CartItem product={item} />
                 </div>
               );
             })}

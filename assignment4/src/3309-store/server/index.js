@@ -158,11 +158,22 @@ app.get("/verifylogin", (req, res) => {
 
 //get all cart items from a given user id
 app.get("/cart", (req, res) => {
-  db.query(`SELECT p.* FROM Product p, CartItem ci WHERE ci.userID = ${req.query.userID} AND ci.prodID = p.id;`, (err, result) => {
+  db.query(`SELECT p.* FROM Product p, CartItem ci WHERE ci.userID = ${req.query.userID} AND ci.prodID = p.id`, (err, result) => {
     if (err) {
       console.log(err);
     } else {
       res.send(result);
+    }
+  });
+});
+
+//add to cart given user id, product id
+app.get("/addToCart", (req, res) => {
+  db.query(`INSERT INTO CartItem(userID, prodID, purchaseAmount) VALUES (${req.query.userID}, ${req.query.prodID}, 1)`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("values are properly inserted");
     }
   });
 });
