@@ -132,7 +132,7 @@ class ProductList extends React.Component {
         <CategoryList callback={this.handleCategory.bind(this)}/>
 
         {/* START HERE FOR STATE CHANGE */}
-        {this.state.filter == 'none'?
+        {this.state.filter === 'none'?
         <div className="products-container">
           <button
             className="button is-danger popup-btn"
