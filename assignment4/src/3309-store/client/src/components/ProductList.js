@@ -6,6 +6,13 @@ import axios from "utils/axios";
 import PopupEditor from "components/PopupEditor";
 import AddProduct from "components/AddProduct";
 
+/*
+  - State for the whole product display --> unfiltered or filtered
+  - When unfiltered we display everything as usual
+  - When filtered we need to only display the specified products 
+  - For state change, we can use a ternary condition to check state
+*/
+
 //ProductList component
 class ProductList extends React.Component {
   //product list state
@@ -15,7 +22,9 @@ class ProductList extends React.Component {
     // stores the entire product list from database
     originalProducts: [],
     productAds: [],
-    cartAmount: 0
+    cartAmount: 0,
+    filter: "none",
+    filteredProducts: []
   };
 
 
@@ -80,14 +89,31 @@ class ProductList extends React.Component {
       originalProducts: _sProducts
     });
   };
+  // Handle callback to retrieve state from CategoryList component
+  handleCategory(data){
+    this.setState({
+      filter:data
+    });
+  }
+
+  // Make call to backend and render the products 
+  renderFilteredProducts(filter){
+    // Use prop categoryName to send the current category name 
+    axios.get(`http://localhost:3001/filter-products/?category=${filter}`).then((response)=>{
+      // Returns JSON in web console
+      console.log(response.data);
+    });
+  }
 
   render() {
     return (
       <div>
         {/* pass search function to productList Header (contains search button) */}
         <ProductListHeader search={this.search} />
-        <CategoryList />
+        <CategoryList callback={this.handleCategory.bind(this)}/>
 
+        {/* START HERE FOR STATE CHANGE */}
+        {this.state.filter == 'none'?
         <div className="products-container">
           <button
             className="button is-danger popup-btn"
@@ -120,6 +146,21 @@ class ProductList extends React.Component {
             })}
           </div>
         </div>
+        :
+        <>
+        {this.renderFilteredProducts(this.state.filter)}
+        {/* iterate through all products */}
+        {/*this.state.products.map((product) => {
+              return (
+                // each column is 3 slots, thus 4 products per line
+                <div className="column is-3" key={product.id}>
+                  <ProductItem product={product} />
+                </div>
+              );
+            })*/}
+        </>
+          }
+        {/* END HERE FOR STATE CHANGE */}
       </div>
     );
   }
