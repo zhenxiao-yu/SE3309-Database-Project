@@ -64,7 +64,7 @@ class EditProduct extends React.Component {
     //send product information to server
     console.log(product);
     axios
-      .put(`http://localhost:3001/updateproduct`, product)
+      .put(`http://localhost:3001/updateproduct/${this.state.id}`, product)
       .then((res) => {
         this.props.close(res.data);
         alert("product edited");
