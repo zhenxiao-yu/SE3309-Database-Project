@@ -24,8 +24,11 @@ const db = mysql.createConnection({
   //your db credentials
   user: "root",
   host: "localhost",
-  password: "615615",
-  database: "se3309",
+  // password: "615615",
+  // database: "se3309",
+
+  password: "password",
+  database: "ecommerce",
 });
 
 //connect
@@ -162,19 +165,8 @@ app.get("/orderItems", (req, res) => {
 });
 
 //get order date given a userid
-app.get("/orderDate", (req, res) => {
-  db.query(`SELECT DISTINCT createTime from Orders JOIN Orderitem ON (Orders.id = Orderitem.orderID) WHERE Orders.userID = "${req.query.userID}"`, (err, result) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.send(result);
-    }
-  });
-});
-
-//get order information given a userid
 app.get("/orderInfo", (req, res) => {
-  db.query(`(SELECT * FROM Orders JOIN Orderitem ON Orders.userID = "${req.query.userID}" AND Orders.id = Orderitem.orderID) ORDER BY createTime`, (err, result) => {
+  db.query(`SELECT DISTINCT Orders.id from Orders JOIN Orderitem ON (Orders.id = Orderitem.orderID) WHERE Orders.userID = "${req.query.userID}"`, (err, result) => {
     if (err) {
       console.log(err);
     } else {
