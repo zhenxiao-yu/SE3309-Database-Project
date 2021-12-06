@@ -1,12 +1,18 @@
 import React from "react";
 import axios from "utils/axios";
-import OrderList from "./OrderList";
 
 class OrderHeader extends React.Component {
 
-    state = {
-        orderNum: []
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            orderNum: [],
+            selectValue: ""
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
     //fetch data from server
     componentDidMount() {
         if (localStorage.getItem("username")) {
@@ -18,6 +24,20 @@ class OrderHeader extends React.Component {
         }
     }
 
+    handleChange(e) {
+        this.setState({ selectValue: e.target.value });
+    }
+
+    addToCart = () => {
+        axios.get(
+                `http://localhost:3001/addOrderCart?userID=${localStorage.getItem("userID")}&orderNum=${this.state.selectValue}`
+            )
+            .then((res) => {
+                console.log(res.data);
+                window.location.reload(false);
+            });
+
+    };
 
     render() {
         return (
@@ -26,14 +46,14 @@ class OrderHeader extends React.Component {
                     <div className="order-num">Product Order History</div>
                     <div className="order-date">
                         <div>
-                            <select>
+                            <select onChange={this.handleChange}>
                                 {this.state.orderNum.map((num) => {
                                     return (
-                                        <option>Order Number: {JSON.stringify(num.id)}</option>
+                                        <option value={JSON.stringify(num.id)}>Order Number: {JSON.stringify(num.id)}</option>
                                     );
                                 })}
                             </select>
-                            <button>Add to Cart</button>
+                            <button onclick={this.addToCart()}>Add to Cart</button>
                         </div>
                     </div>
                 </div>
