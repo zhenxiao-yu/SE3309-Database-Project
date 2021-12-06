@@ -24,8 +24,8 @@ const db = mysql.createConnection({
   //your db credentials
   user: "sqluser",
   host: "localhost",
-  password: "615615",
-  database: "se3309",
+  password: "password",
+  database: "SE3309",
 });
 
 //connect
@@ -129,7 +129,6 @@ app.put("/updateproduct/:id", (req, res) => {
   });
 });
 
-<<<<<<< HEAD
 // GET all products in specified category 
 app.get('/filter-products/',(req, res)=>{
   // Using a query string 
@@ -139,7 +138,7 @@ app.get('/filter-products/',(req, res)=>{
   category = category['category'];
   // Query to get all products in specified category 
   try{
-   db.query(`SELECT * FROM ecommerce.product WHERE category="${category}"`,(err, result)=>{
+   db.query(`SELECT * FROM product WHERE category="${category}"`,(err, result)=>{
      res.send(result);
    });
   }catch(err){
@@ -150,7 +149,6 @@ app.get('/filter-products/',(req, res)=>{
   
 })
 
-=======
 //verify that the given username and password are correct
 app.get("/verifylogin", (req, res) => {
   db.query(
@@ -305,5 +303,6 @@ app.post("/addOrder", (req, res) => {
   );
 });
 
->>>>>>> main
+
+
 // app.delete()
