@@ -147,7 +147,20 @@ app.get('/filter-products/',(req, res)=>{
     }
   }
   
-})
+});
+
+// Get a product from each category with the most views 
+app.get('/most-viewed-product-category/',(req,res)=>{
+  try{
+    db.query('SELECT * FROM Product WHERE viewCount IN (SELECT MAX(viewCount) FROM Product GROUP BY category)', (err,result)=>{
+      res.send(result);
+    });
+  }catch(err){
+    if(err){
+      res.send(err);
+    }
+  }
+});
 
 //verify that the given username and password are correct
 app.get("/verifylogin", (req, res) => {
