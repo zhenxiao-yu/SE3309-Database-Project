@@ -71,6 +71,19 @@ class EditProduct extends React.Component {
       });
   };
 
+  onDelete = () => {
+    //stop default form behavior
+    axios
+      .get(`http://localhost:3001/deleteproduct/${this.state.id}`)
+      .then((res) => {
+        // this.props.deleteProduct(this.state.id);
+        console.log("deleted");
+        this.props.close();
+        alert("product removed");
+        window.location.reload();
+      });
+  };
+
   render() {
     return (
       <div className="child-popup">
@@ -229,6 +242,15 @@ class EditProduct extends React.Component {
             {/* Sumbit Button */}
             <div className="control">
               <button className="button is-link">Submit</button>
+            </div>
+            <div className="control">
+              <button
+                className="button is-danger"
+                type="button"
+                onClick={this.onDelete}
+              >
+                Delete
+              </button>
             </div>
             {/* Close Button */}
             <div className="control">

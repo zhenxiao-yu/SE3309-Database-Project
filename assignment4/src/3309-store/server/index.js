@@ -120,11 +120,40 @@ app.put("/updateproduct/:id", (req, res) => {
   const viewCount = req.body.viewCount;
   const category = req.body.category;
   let sql = `UPDATE product SET prodName = ?, sellerID = ?, subtitle = ?, image = ?, descr = ?, price = ?, stock =?, prodStatus = ?, viewCount = ?, category = ? WHERE id = ?`;
-  db.query(sql, [prodName, sellerID, subtitle, image, descr, price, stock, prodStatus, viewCount, category, productID], (err, result)=> {
+  db.query(
+    sql,
+    [
+      prodName,
+      sellerID,
+      subtitle,
+      image,
+      descr,
+      price,
+      stock,
+      prodStatus,
+      viewCount,
+      category,
+      productID,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("values are properly updated");
+      }
+    }
+  );
+});
+
+//delete product
+app.get("/deleteproduct/:id", (req, res) => {
+  let productID = req.params.id;
+  let sql = `DELETE FROM product WHERE id =?`;
+  db.query(sql, [productID], (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      res.send("values are properly updated");
+      res.send("values are properly deleted");
     }
   });
 });
@@ -315,7 +344,5 @@ app.post("/addOrder", (req, res) => {
     }
   );
 });
-
-
 
 // app.delete()

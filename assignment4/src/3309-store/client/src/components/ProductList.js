@@ -71,9 +71,9 @@ class ProductList extends React.Component {
       component: AddProduct,
       callback: data => {
         //when the data is not empty, add new data to a list of products
-        console.log(data)
         if (data) {
-          this.add(data);
+          //this.add(data);
+          window.location.reload();
         }
         console.log(data);
       },
@@ -83,17 +83,46 @@ class ProductList extends React.Component {
   //add product method 
   add = product => {
     //new product list
-    const _products = [...this.state.products];
-    _products.push(product);
+    const tempProducts = [...this.state.products];
+    tempProducts.push(product);
     //new source product list
-    const _sProducts = [...this.state.originalProducts];
-    _sProducts.push(product);
+    const tempOrigProducts = [...this.state.originalProducts];
+    tempOrigProducts.push(product);
 
     this.setState({
-      products: _products,
-      originalProducts: _sProducts
+      products: tempProducts,
+      originalProducts: tempOrigProducts
     });
   };
+
+  //edit product method 
+  edit = product => {
+    //new product list
+    const tempProducts = [...this.state.products];
+    const tempIndex = tempProducts.findIndex(p => p.id === product.id)
+    tempProducts.splice(tempIndex,1, product)
+
+    //new source product list
+    const tempOrigProducts = [...this.state.originalProducts];
+    const tempOrigIndex = tempProducts.findIndex(p => p.id === product.id)
+    tempOrigProducts.splice(tempOrigIndex,1, product)
+    this.setState({
+      products: tempProducts,
+      originalProducts: tempOrigProducts
+    });
+  };
+
+  //delete product method
+  delete = id => {
+    const tempProducts = this.state.products.filter(p => p.id !== id )
+    const tempOrigProducts = this.state.originalProducts.filter(p => p.id !== id )
+    this.setState({
+      products: tempProducts,
+      originalProducts: tempOrigProducts
+    });
+  }
+
+
   // Handle callback to retrieve state from CategoryList component
   handleCategory(data){
     // Sets the filter state
@@ -122,7 +151,7 @@ class ProductList extends React.Component {
         <CategoryList callback={this.handleCategory.bind(this)}/>
 
         {/* START HERE FOR STATE CHANGE */}
-        {this.state.filter == 'none'?
+        {this.state.filter === 'none'?
         <div className="products-container">
           <button
             className="button is-danger popup-btn"
@@ -155,7 +184,7 @@ class ProductList extends React.Component {
                 // each column is 3 slots, thus 4 products per line
                 <div className="column is-3" key={ad.id}>
                   <h1>Promoted</h1>
-                  <ProductItem product={ad} />
+                  <ProductItem product={ad}/>
                 </div>
               );
             })}
@@ -182,7 +211,7 @@ class ProductList extends React.Component {
                 return (
                   // each column is 3 slots, thus 4 products per line
                   <div className="column is-3" key={product.id}>
-                    <ProductItem product={product} />
+                    <ProductItem product={product} edit={this.edit} delete={this.delete}/>
                   </div>
                 );
               })}

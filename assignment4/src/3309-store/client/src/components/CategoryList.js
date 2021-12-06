@@ -43,3 +43,4 @@ class CategoryList extends React.Component {
 }
 
 export default CategoryList;
+
