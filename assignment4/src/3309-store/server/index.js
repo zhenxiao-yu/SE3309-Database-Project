@@ -201,4 +201,80 @@ app.get("/removeCartItem", (req, res) => {
   });
 });
 
+//get list of payment methods and ids
+app.get("/paymentInfo", (req, res) => {
+  db.query(`SELECT id, paymentMethod FROM PaymentInfo WHERE userID = ${req.query.userID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//get list of shipping infos and ids
+app.get("/shippingInfo", (req, res) => {
+  db.query(`SELECT id, recipientAddress FROM ShippingInfo WHERE userID = ${req.query.userID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.post("/addOrder", (req, res) => {
+  db.query(`INSERT INTO OrderStatus(userID) VALUES (${req.body.userID})`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+
+      db.query(`SELECT LAST_INSERT_ID() AS id`, (err2, result2) => {
+        if (err2) {
+          console.log(err2);
+        } else {
+          db.query(`INSERT INTO Orders(userID, statusID, paymentID, shippingID) VALUES(${req.body.userID}, ${result2[0].id}, ${req.body.paymentID}, ${req.body.shippingID})`, (err3, result3) => {
+            if (err3) {
+              console.log(err3);
+            } else {
+
+              db.query(`SELECT LAST_INSERT_ID() AS id`, (err4, result4) => {
+                if (err4) {
+                  console.log(err4);
+                } else {
+
+                  db.query(`INSERT INTO OrderItem(orderID, prodID, purchaseAmount) SELECT ${result4[0].id}, prodID, 1 FROM CartItem WHERE userID = ${req.body.userID}`, (err4, result4) => {
+                    if (err4) {
+                      console.log(err4);
+                    } else {
+                      db.query(`DELETE FROM CartItem WHERE userID = ${req.body.userID}`, (err5, result5) => {
+                        if (err5) {
+                          console.log(err5);
+                        } else {
+                          res.send("values are properly inserted");
+    
+                        }
+                      });
+
+                    }
+                  });
+
+
+                }
+              });
+
+
+            }
+          });
+
+
+        }
+      });
+
+
+    }
+  });
+})
+
+
 // app.delete()
