@@ -15,22 +15,22 @@ class CategoryList extends React.Component {
           <div className="columns is-multiline is-desktop">
             {/* each column is 3 slots, thus 4 products per line */}
             <div className="column is-2">
-              <Category callback={this.method} categoryName="Category 1" />
+              <Category callback={this.method} categoryName="Computer Mice" />
             </div>
             <div className="column is-2">
-              <Category callback={this.method} categoryName="Category 2" />
+              <Category callback={this.method} categoryName="Computers" />
             </div>
             <div className="column is-2">
-              <Category callback={this.method} categoryName="Category 3" />
+              <Category callback={this.method} categoryName="Furniture" />
             </div>
             <div className="column is-2">
-              <Category callback={this.method} categoryName="Category 4" />
+              <Category callback={this.method} categoryName="Game Consoles" />
             </div>
             <div className="column is-2">
-              <Category callback={this.method} categoryName="Category 5" />
+              <Category callback={this.method} categoryName="Monitors" />
             </div>
             <div className="column is-2">
-              <Category callback={this.method} categoryName="Category 6" />
+              <Category callback={this.method} categoryName="Phones" />
             </div>
           </div>
         </div>
