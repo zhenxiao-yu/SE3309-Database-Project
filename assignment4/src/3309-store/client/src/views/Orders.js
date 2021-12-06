@@ -4,11 +4,12 @@ import OrderList from "components/OrderList";
 
 //orders  component
 class Orders extends React.Component {
-
-    // let username = localStorage.getItem("username")
-
-    // localStorage.getItem("username")
-    // localStorage.get("userID")
+    componentDidMount() {
+        //redirect to login if not logged in
+        if (!localStorage.getItem("username")) {
+          this.props.history.push('/login');
+        }
+      }
 
     render() {
         return (
