@@ -141,6 +141,7 @@ app.put("/updateproduct:id", (req, res) => {
   );
 });
 
+//verify that the given username and password are correct
 app.get("/verifylogin", (req, res) => {
   db.query(`SELECT id, pass FROM AllAccount WHERE username = "${req.query.username}"`, (err, result) => {
     if (err) {
@@ -163,6 +164,41 @@ app.get("/orderItems", (req, res) => {
     } else {
       res.send(result);
     }
-  })
-})
+  });
+});
+
+
+//get all cart items from a given user id
+app.get("/cart", (req, res) => {
+  db.query(`SELECT p.* FROM Product p, CartItem ci WHERE ci.userID = ${req.query.userID} AND ci.prodID = p.id`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+//add to cart given user id, product id
+app.get("/addToCart", (req, res) => {
+  db.query(`INSERT INTO CartItem(userID, prodID, purchaseAmount) VALUES (${req.query.userID}, ${req.query.prodID}, 1)`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("values are properly inserted");
+    }
+  });
+});
+
+//remove a cart item given user id, product id
+app.get("/removeCartItem", (req, res) => {
+  db.query(`DELETE FROM CartItem WHERE userID = ${req.query.userID} AND prodID = ${req.query.prodID}`, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send("values are properly removed");
+    }
+  });
+});
+
 // app.delete()
