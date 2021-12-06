@@ -40,7 +40,7 @@ class Login extends React.Component {
     return (
       <div className="login-container">
         <form className="box login-window" onSubmit={this.handleLogin}>
-          <h4 className="title is-4">Please Login First.</h4>
+          <h4 className="title is-4">Login.</h4>
           {
           this.state.failedLogin? <h3 style={{ color: 'red' }}>Incorrect username or password</h3> : ""
           }
