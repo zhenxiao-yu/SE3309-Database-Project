@@ -22,7 +22,7 @@ app.use(cors());
 //setup db connection
 const db = mysql.createConnection({
   //your db credentials
-  user: "root",
+  user: "sqluser",
   host: "localhost",
   // password: "615615",
   // database: "se3309",
@@ -123,13 +123,75 @@ app.put("/updateproduct/:id", (req, res) => {
   const viewCount = req.body.viewCount;
   const category = req.body.category;
   let sql = `UPDATE product SET prodName = ?, sellerID = ?, subtitle = ?, image = ?, descr = ?, price = ?, stock =?, prodStatus = ?, viewCount = ?, category = ? WHERE id = ?`;
-  db.query(sql, [prodName, sellerID, subtitle, image, descr, price, stock, prodStatus, viewCount, category, productID], (err, result) => {
+  db.query(
+    sql,
+    [
+      prodName,
+      sellerID,
+      subtitle,
+      image,
+      descr,
+      price,
+      stock,
+      prodStatus,
+      viewCount,
+      category,
+      productID,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("values are properly updated");
+      }
+    }
+  );
+});
+
+//delete product
+app.get("/deleteproduct/:id", (req, res) => {
+  let productID = req.params.id;
+  let sql = `DELETE FROM product WHERE id =?`;
+  db.query(sql, [productID], (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      res.send("values are properly updated");
+      res.send("values are properly deleted");
     }
   });
+});
+
+// GET all products in specified category 
+app.get('/filter-products/',(req, res)=>{
+  // Using a query string 
+  // Example: .../filter-products/?category=category 1
+  // Retrieve query string 
+  let category = req.query;
+  category = category['category'];
+  // Query to get all products in specified category 
+  try{
+   db.query(`SELECT * FROM product WHERE category="${category}"`,(err, result)=>{
+     res.send(result);
+   });
+  }catch(err){
+    if(err){
+      res.send(err);
+    }
+  }
+  
+});
+
+// Get a product from each category with the most views 
+app.get('/most-viewed-product-category/',(req,res)=>{
+  try{
+    db.query('SELECT * FROM Product WHERE viewCount IN (SELECT MAX(viewCount) FROM Product GROUP BY category)', (err,result)=>{
+      res.send(result);
+    });
+  }catch(err){
+    if(err){
+      res.send(err);
+    }
+  }
 });
 
 //verify that the given username and password are correct

@@ -16,7 +16,10 @@ class ProductList extends React.Component {
     // stores the entire product list from database
     originalProducts: [],
     productAds: [],
-    cartAmount: 0
+    cartAmount: 0,
+    filter: "none",
+    filteredProducts: [],
+    mostViewedProducts: []
   };
 
 
@@ -34,6 +37,12 @@ class ProductList extends React.Component {
       this.setState({
         products: res.data,
         originalProducts: res.data,
+      });
+    });
+
+    axios.get("http://localhost:3001/most-viewed-product-category/").then((res)=>{
+      this.setState({
+        mostViewedProducts: res.data
       });
     });
 
@@ -62,9 +71,9 @@ class ProductList extends React.Component {
       component: AddProduct,
       callback: data => {
         //when the data is not empty, add new data to a list of products
-        console.log(data)
         if (data) {
-          this.add(data);
+          //this.add(data);
+          window.location.reload();
         }
         console.log(data);
       },
@@ -74,25 +83,75 @@ class ProductList extends React.Component {
   //add product method 
   add = product => {
     //new product list
-    const _products = [...this.state.products];
-    _products.push(product);
+    const tempProducts = [...this.state.products];
+    tempProducts.push(product);
     //new source product list
-    const _sProducts = [...this.state.originalProducts];
-    _sProducts.push(product);
+    const tempOrigProducts = [...this.state.originalProducts];
+    tempOrigProducts.push(product);
 
     this.setState({
-      products: _products,
-      originalProducts: _sProducts
+      products: tempProducts,
+      originalProducts: tempOrigProducts
     });
   };
+
+  //edit product method 
+  edit = product => {
+    //new product list
+    const tempProducts = [...this.state.products];
+    const tempIndex = tempProducts.findIndex(p => p.id === product.id)
+    tempProducts.splice(tempIndex,1, product)
+
+    //new source product list
+    const tempOrigProducts = [...this.state.originalProducts];
+    const tempOrigIndex = tempProducts.findIndex(p => p.id === product.id)
+    tempOrigProducts.splice(tempOrigIndex,1, product)
+    this.setState({
+      products: tempProducts,
+      originalProducts: tempOrigProducts
+    });
+  };
+
+  //delete product method
+  delete = id => {
+    const tempProducts = this.state.products.filter(p => p.id !== id )
+    const tempOrigProducts = this.state.originalProducts.filter(p => p.id !== id )
+    this.setState({
+      products: tempProducts,
+      originalProducts: tempOrigProducts
+    });
+  }
+
+
+  // Handle callback to retrieve state from CategoryList component
+  handleCategory(data){
+    // Sets the filter state
+    // Component will know which API call to make 
+    this.setState({
+      filter:data
+    });
+  }
+
+  // Make call to backend and render the products 
+  renderFilteredProducts(filter){
+    // Use prop categoryName to send the current category name 
+    axios.get(`http://localhost:3001/filter-products/?category=${filter}`).then((response)=>{
+      // Set new array state with received JSON responses
+      this.setState({
+        filteredProducts: response.data
+      });
+    });
+  }
 
   render() {
     return (
       <div>
         {/* pass search function to productList Header (contains search button) */}
         <ProductListHeader search={this.search} />
-        <CategoryList />
+        <CategoryList callback={this.handleCategory.bind(this)}/>
 
+        {/* START HERE FOR STATE CHANGE */}
+        {this.state.filter === 'none'?
         <div className="products-container">
           <button
             className="button is-danger popup-btn"
@@ -100,20 +159,38 @@ class ProductList extends React.Component {
           >
             + Add Product +
           </button>
-          {/* each line has 12 slots */}
-          <div className="columns is-multiline is-desktop">
 
+          {/* START most viewed products from each category */}
+          <h1 className="title-sections">Most Viewed Products</h1>
+          <div className="columns is-multiline is-desktop">
+            {/* iterate through the most viewed products */}
+            {this.state.mostViewedProducts.map((ad) => {
+              return (
+                // each column is 3 slots, thus 4 products per line
+                <div className="column is-3" key={ad.id}>
+                  <ProductItem product={ad} />
+                </div>
+              );
+            })}
+          </div>
+          {/* END most viewed products from each category */}
+
+          {/* each line has 12 slots */}
+          
+          <div className="columns is-multiline is-desktop">
             {/* iterate through the advertisements */}
             {this.state.productAds.map((ad) => {
               return (
                 // each column is 3 slots, thus 4 products per line
                 <div className="column is-3" key={ad.id}>
                   <h1>Promoted</h1>
-                  <ProductItem product={ad} />
+                  <ProductItem product={ad}/>
                 </div>
               );
             })}
-
+            </div>
+            <h1 className="title-sections">All Products</h1>
+            <div className="columns is-multiline is-desktop">
             {/* iterate through all products */}
             {this.state.products.map((product) => {
               return (
@@ -125,6 +202,23 @@ class ProductList extends React.Component {
             })}
           </div>
         </div>
+        :
+        <div className="products-container">
+          <div className="columns is-multiline is-desktop">
+          {this.renderFilteredProducts(this.state.filter)}
+          {/* iterate through all products */}
+          {this.state.filteredProducts.map((product) => {
+                return (
+                  // each column is 3 slots, thus 4 products per line
+                  <div className="column is-3" key={product.id}>
+                    <ProductItem product={product} edit={this.edit} delete={this.delete}/>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
+          }
+        {/* END HERE FOR STATE CHANGE */}
       </div>
     );
   }

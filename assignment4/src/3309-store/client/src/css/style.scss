@@ -155,7 +155,7 @@
   background: rgba(0, 0, 0, 1);
   padding: 0.5rem;
   cursor: pointer;
-  & a {
+  & p {
     color: #fff;
     padding: 0 8px;
     transition: all 0.2s;
@@ -378,4 +378,9 @@
   padding: 1rem 2rem;
 }
 
-//---------------------------------------------
+//Most viewed section --------------------------------
+.title-sections{
+  text-align: center;
+  padding:2rem;
+  font-size:1rem;
+}
