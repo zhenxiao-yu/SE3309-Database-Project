@@ -1,15 +1,14 @@
 import React from "react";
 import axios from "utils/axios";
-
+//orderHeader class
 class OrderHeader extends React.Component {
-
+    //sets the states for some header information
     constructor(props) {
         super(props);
         this.state = {
             orderNum: [],
             selectValue: 1
         };
-
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -24,18 +23,17 @@ class OrderHeader extends React.Component {
         }
     }
 
+    //changes state when selected drop down item changes
     handleChange = (event) => {
         this.setState({ selectValue: event.target.value });
     };
 
+    //function that adds items to cart
     addToCart = () => {
-        axios.get(
-            `http://localhost:3001/addOrderCart?userID=${localStorage.getItem("userID")}&orderNum=${this.state.selectValue}`
-        )
+        //
+        axios.get(`http://localhost:3001/addOrderCart?userID=${localStorage.getItem("userID")}&orderNum=${this.state.selectValue}`)
             .then((res) => {
-                console.log(res.data);
                 alert(res.data);
-                window.location.reload(false);
             });
 
     };
@@ -44,10 +42,12 @@ class OrderHeader extends React.Component {
         return (
             <div>
                 <div className="order-banner">
+                {/* title */}
                     <div className="order-num">Product Order History</div>
-                    <div className="order-date">
+                    <div className="reorder">
                         <div>
                             <select onChange={this.handleChange}>
+                            {/* loads dropdown menu items */}
                                 {this.state.orderNum.map((num) => {
                                     return (
                                         <option value={JSON.stringify(num.id)}>Order Number: {JSON.stringify(num.id)}</option>

@@ -180,8 +180,10 @@ app.get("/addOrderCart", (req, res) => {
   db.query(`INSERT INTO CartItem (userID,prodID,purchaseAmount) (SELECT ${req.query.userID}, prodID, purchaseAmount FROM OrderItem WHERE orderID = ${req.query.orderNum})`, (err, result) => {
     if (err) {
       console.log(err);
+      if (err.code = 'ER_DUP_ENTRY')
+        res.send("Duplicate Entry! Please checkout before reordering.");
     } else {
-      res.send("values are properly inserted");
+      res.send("Products Added to Cart");
     }
   });
 })

@@ -2,8 +2,9 @@ import React from "react";
 import OrderItem from "components/OrderItem";
 import axios from "utils/axios";
 
+//order list to list previously ordered products
 class OrderList extends React.Component {
-
+    //state
     state = {
         products: []
     };
@@ -21,10 +22,10 @@ class OrderList extends React.Component {
     }
 
     render() {
-
         return (
             <div className="products-container">
                 <div className="columns is-multiline is-desktop">
+                {/* maps through list of products and displays them to user */}
                     {this.state.products.map((product) => {
                         return (
                             // each column is 3 slots, thus 4 products per line
