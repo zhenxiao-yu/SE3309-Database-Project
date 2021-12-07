@@ -42,7 +42,7 @@ class Register extends React.Component {
           /*
           loginInfo.username = username;
           loginInfo.id = res.data.id;*/
-          this.props.history.push('/');
+          this.props.history.push('/login');
         } else {
           this.setState ({
             failedRegistser: true

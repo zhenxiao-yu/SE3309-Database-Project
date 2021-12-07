@@ -71,6 +71,7 @@ app.get("/products", (req, res) => {
 });
 //insert into allaccount
 app.post("/newUser", (req, res) => {
+  
   console.log(req.query);
   const username = req.body.username;
   const pass = req.body.pass;
@@ -97,12 +98,14 @@ app.post("/newUser", (req, res) => {
     (err, result) => {
       if (err) {
         console.log(err);
+        res.send(false);
       } else {
         res.send("values are properly inserted");
       }
     }
   );
 });
+
 //insert into product
 app.post("/newproduct", (req, res) => {
   console.log(req.body);
