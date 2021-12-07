@@ -94,7 +94,7 @@ class Checkout extends React.Component {
                     {/* Shipping info */}
                     <div className="field">
                         <div className="control">
-                            <label className="label has-text-left">Payment Info</label>
+                            <label className="label has-text-left">Shipping Info</label>
                             <div className="select is-fullwidth">
                                 <select
                                     name="shippingID"
