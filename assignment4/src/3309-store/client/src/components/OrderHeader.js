@@ -7,7 +7,7 @@ class OrderHeader extends React.Component {
         super(props);
         this.state = {
             orderNum: [],
-            selectValue: ""
+            selectValue: 1
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,22 +18,23 @@ class OrderHeader extends React.Component {
         if (localStorage.getItem("username")) {
             axios.get(`http://localhost:3001/orderInfo?userID=${localStorage.getItem("userID")}`).then((res) => {
                 this.setState({
-                    orderNum: res.data,
+                    orderNum: res.data
                 });
             });
         }
     }
 
-    handleChange(e) {
-        this.setState({ selectValue: e.target.value });
-    }
+    handleChange = (event) => {
+        this.setState({ selectValue: event.target.value });
+    };
 
     addToCart = () => {
         axios.get(
-                `http://localhost:3001/addOrderCart?userID=${localStorage.getItem("userID")}&orderNum=${this.state.selectValue}`
-            )
+            `http://localhost:3001/addOrderCart?userID=${localStorage.getItem("userID")}&orderNum=${this.state.selectValue}`
+        )
             .then((res) => {
                 console.log(res.data);
+                alert(res.data);
                 window.location.reload(false);
             });
 
@@ -53,8 +54,8 @@ class OrderHeader extends React.Component {
                                     );
                                 })}
                             </select>
-                            <button onclick={this.addToCart()}>Add to Cart</button>
                         </div>
+                        <button onClick={this.addToCart.bind(this)}>Add to Cart</button>
                     </div>
                 </div>
             </div>
