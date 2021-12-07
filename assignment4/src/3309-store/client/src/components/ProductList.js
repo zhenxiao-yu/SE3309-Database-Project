@@ -18,7 +18,8 @@ class ProductList extends React.Component {
     productAds: [],
     cartAmount: 0,
     filter: "none",
-    filteredProducts: []
+    filteredProducts: [],
+    mostViewedProducts: []
   };
 
 
@@ -36,6 +37,12 @@ class ProductList extends React.Component {
       this.setState({
         products: res.data,
         originalProducts: res.data,
+      });
+    });
+
+    axios.get("http://localhost:3001/most-viewed-product-category/").then((res)=>{
+      this.setState({
+        mostViewedProducts: res.data
       });
     });
 
@@ -152,9 +159,25 @@ class ProductList extends React.Component {
           >
             + Add Product +
           </button>
-          {/* each line has 12 slots */}
-          <div className="columns is-multiline is-desktop">
 
+          {/* START most viewed products from each category */}
+          <h1 className="title-sections">Most Viewed Products</h1>
+          <div className="columns is-multiline is-desktop">
+            {/* iterate through the most viewed products */}
+            {this.state.mostViewedProducts.map((ad) => {
+              return (
+                // each column is 3 slots, thus 4 products per line
+                <div className="column is-3" key={ad.id}>
+                  <ProductItem product={ad} />
+                </div>
+              );
+            })}
+          </div>
+          {/* END most viewed products from each category */}
+
+          {/* each line has 12 slots */}
+          
+          <div className="columns is-multiline is-desktop">
             {/* iterate through the advertisements */}
             {this.state.productAds.map((ad) => {
               return (
@@ -165,7 +188,9 @@ class ProductList extends React.Component {
                 </div>
               );
             })}
-
+            </div>
+            <h1 className="title-sections">All Products</h1>
+            <div className="columns is-multiline is-desktop">
             {/* iterate through all products */}
             {this.state.products.map((product) => {
               return (
