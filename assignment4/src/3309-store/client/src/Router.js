@@ -5,6 +5,7 @@ import Login from "views/Login";
 import InvalidPath from "views/InvalidPath";
 import Orders from "views/Orders"
 import Cart from "views/Cart"
+import Register from "views/Register";
 
 //router component for switching between pages (views)
 const Router = () => (
@@ -17,7 +18,7 @@ const Router = () => (
       <Route path="/login" component={Login} />
 
       {/* redirect to new user register page */}
-      {/* <Route path="/register" component={Register} /> */}
+      {<Route path="/register" component={Register} />}
 
       {/* redirect to shopping cart page */}
       <Route path="/cart" component={Cart} />
