@@ -1,5 +1,11 @@
 import React from "react";
 
+// quit
+const onClose = () => {
+  window.open("about:blank", "_self");
+  window.close();
+};
+
 // Header component
 const Header = (props) => {
   return (
@@ -16,6 +22,15 @@ const Header = (props) => {
           {/* redirect to user's Payment info */}
           <a href="/">Payment</a>
         </div>
+        <button
+            class="button is-small is-rounded is-danger"
+            onClick={onClose}
+          >
+            <span class="icon is-small">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </span>
+            <span>Quit</span>
+          </button>
         {/* links at left side of the header */}
         <div className="nav-right">
           {/* render username when logged in */}
@@ -29,8 +44,6 @@ const Header = (props) => {
                 {localStorage.getItem("username")}
               </span>
             </React.Fragment>
-
-
           ) : (
             <React.Fragment>
               {/* redirect to login page */}
