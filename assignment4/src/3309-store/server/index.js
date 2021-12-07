@@ -69,7 +69,40 @@ app.get("/products", (req, res) => {
     }
   });
 });
-
+//insert into allaccount
+app.post("/newUser", (req, res) => {
+  console.log(req.query);
+  const username = req.body.username;
+  const pass = req.body.pass;
+  const email = req.body.email;
+  const phoneNum = req.body.phoneNum;
+  const secureQ = req.body.secureQ;
+  const secureA = req.body.secureA;
+  const storeName= req.body.storeName;
+  const sellerFlag = req.body.sellerFlag;
+  const userFlag = req.body.userFlag;
+  db.query(
+    "INSERT INTO AllAccount (username, pass, email, phoneNum, secureQ, secureA, storeName, sellerFlag, userFlag) VALUES (?,?,?,?,?,?,?,?,?)",
+    [
+      username,
+      pass,
+      email,
+      phoneNum,
+      secureQ,
+      secureA,
+      storeName,
+      sellerFlag,
+      userFlag,
+    ],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("values are properly inserted");
+      }
+    }
+  );
+});
 //insert into product
 app.post("/newproduct", (req, res) => {
   console.log(req.body);
