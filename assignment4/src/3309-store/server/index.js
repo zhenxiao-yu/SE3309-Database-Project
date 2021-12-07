@@ -22,7 +22,7 @@ app.use(cors());
 //setup db connection
 const db = mysql.createConnection({
   //your db credentials
-  user: "mysqluser",
+  user: "root",
   host: "localhost",
   // password: "615615",
   // database: "se3309",
@@ -72,19 +72,18 @@ app.get("/products", (req, res) => {
 //insert into allaccount
 app.post("/newUser", (req, res) => {
   console.log(req.query);
-  const username = req.query.username;
-  const pass = req.query.pass;
-  const email = req.query.email;
-  const phoneNum = req.query.phoneNum;
-  const secureQ = req.query.secureQ;
-  const secureA = req.query.secureA;
-  const storeName= req.query.storeName;
-  const sellerFlag = req.query.sellerFlag;
-  const userFlag = req.query.userFlag;
+  const username = req.body.username;
+  const pass = req.body.pass;
+  const email = req.body.email;
+  const phoneNum = req.body.phoneNum;
+  const secureQ = req.body.secureQ;
+  const secureA = req.body.secureA;
+  const storeName= req.body.storeName;
+  const sellerFlag = req.body.sellerFlag;
+  const userFlag = req.body.userFlag;
   db.query(
-    "INSERT INTO AllAccount (username, pass, email, phoneNum, secureQ,secureA, storeName, sellerFlag, userFlag) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO AllAccount (username, pass, email, phoneNum, secureQ, secureA, storeName, sellerFlag, userFlag) VALUES (?,?,?,?,?,?,?,?,?)",
     [
-      id,
       username,
       pass,
       email,

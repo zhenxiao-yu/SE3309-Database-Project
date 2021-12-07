@@ -13,8 +13,8 @@ class Register extends React.Component {
         secureQ: "",
         secureA: "",
         storeName: "",
-        sellerFlag: "true",
-        userFlag: "true",
+        sellerFlag: "0",
+        userFlag: "1",
         failedRegistser: false
     };
 
@@ -63,7 +63,7 @@ class Register extends React.Component {
             <div className="field">
               <label className="label">Password</label>
               <div className="control">
-                <input type="password" className="input" placeholder="Password" name="password"/>
+                <input type="password" className="input" placeholder="Password" name="pass"/>
               </div>
             </div>
             {/* Email input field */}

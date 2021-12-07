@@ -49,7 +49,7 @@ const Header = (props) => {
               {/* redirect to login page */}
               <a href="/login">Login</a>
               {/* redirect to Register page */}
-              <a href="/">Register</a>
+              <a href="/register">Register</a>
             </React.Fragment>
           )}
         </div>
