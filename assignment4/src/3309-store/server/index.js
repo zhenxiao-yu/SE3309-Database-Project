@@ -22,13 +22,13 @@ app.use(cors());
 //setup db connection
 const db = mysql.createConnection({
   //your db credentials
-  user: "sqluser",
+  user: "root",
   host: "localhost",
   // password: "615615",
   // database: "se3309",
 
   password: "password",
-  database: "ecommerce",
+  database: "ecommerce"
 });
 
 //connect
@@ -215,7 +215,8 @@ app.get("/verifylogin", (req, res) => {
 //get all products in order history given a userid
 app.get("/orderItems", (req, res) => {
   db.query(
-    `SELECT * FROM Product WHERE Product.id IN (SELECT prodID FROM Orders JOIN Orderitem ON Orders.userID = "${req.query.userID}" AND Orders.id = Orderitem.orderID)`,
+    `SELECT Product.id, prodName, sellerID,subtitle,image,descr,price,stock,prodStatus,viewCount,category, orderID FROM Product JOIN (SELECT orderID,prodID FROM Orders JOIN Orderitem ON Orders.userID = ${req.query.userID} AND Orders.id = Orderitem.orderID) AS T ON Product.id = T.prodID
+    `,
     (err, result) => {
       if (err) {
         console.log(err);

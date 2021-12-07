@@ -16,6 +16,7 @@ class OrderItem extends React.Component {
             prodStatus,
             viewCount,
             category,
+            orderID
         } = this.props.product;
 
         //change class based on product status
@@ -40,15 +41,7 @@ class OrderItem extends React.Component {
             <div className={productClass[statusConverter(prodStatus)]}>
                 {/* details/info about the product */}
                 <div className="item-content">
-                    {/* edit button */}
-                    <div
-                        className="item-header has-text-right"
-                        onClick={this.editProduct}
-                    >
-                        <span className="icon edit-button">
-                            <i class="fa-solid fa-sliders"></i>
-                        </span>
-                    </div>
+                <div className="item-header has-text-right">#{orderID}</div>
                     <div className="item-img-container">
                         <div className="on-sale-label">On Sale!</div>
                         <div className="out-of-stock-label">Out Of Stock</div>
@@ -76,12 +69,7 @@ class OrderItem extends React.Component {
                         <span>&#36;</span>
                         <span>{price}</span>
                     </p>
-                    {/* add to cart button*/}
-                    <button className="item-btn" disabled={statusConverter(prodStatus) === "unavailable"} onClick={this.addToCart}>
-                        <i className="fas fa-shopping-cart"></i>
-                        {/* show cancel icon when out of stock */}
-                        <i className="fas fa-cancel"></i>
-                    </button>
+                   
                 </div>
             </div>
         );

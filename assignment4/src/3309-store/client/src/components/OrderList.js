@@ -6,7 +6,8 @@ import axios from "utils/axios";
 class OrderList extends React.Component {
     //state
     state = {
-        products: []
+        products: [],
+        order:[]
     };
 
     //fetch data from server
@@ -17,7 +18,14 @@ class OrderList extends React.Component {
                     products: res.data
                 });
             });
+        }
 
+        if (localStorage.getItem("username")) {
+            axios.get(`http://localhost:3001/orderItems?userID=${localStorage.getItem("userID")}`).then((res) => {
+                this.setState({
+                    products: res.data
+                });
+            });
         }
     }
 
@@ -35,11 +43,9 @@ class OrderList extends React.Component {
                         )
                     })}
                 </div>
-
             </div>
         )
     }
-
 }
 
 export default OrderList;
