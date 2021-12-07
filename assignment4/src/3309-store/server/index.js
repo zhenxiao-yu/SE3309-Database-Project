@@ -245,7 +245,7 @@ app.get("/verifylogin", (req, res) => {
   );
 });
 
-//get all products in order history given a userid
+//get all product information and order numbers in order history given a userid
 app.get("/orderItems", (req, res) => {
   db.query(
     `SELECT Product.id, prodName, sellerID,subtitle,image,descr,price,stock,prodStatus,viewCount,category, orderID FROM Product JOIN (SELECT orderID,prodID FROM Orders JOIN Orderitem ON Orders.userID = ${req.query.userID} AND Orders.id = Orderitem.orderID) AS T ON Product.id = T.prodID

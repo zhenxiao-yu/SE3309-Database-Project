@@ -5,10 +5,7 @@ class OrderItem extends React.Component {
     render() {
         //   destructure props
         const {
-            //id,
             prodName,
-            //sellerID,
-            //subtitle,
             image,
             descr,
             price,
@@ -41,6 +38,7 @@ class OrderItem extends React.Component {
             <div className={productClass[statusConverter(prodStatus)]}>
                 {/* details/info about the product */}
                 <div className="item-content">
+                {/* display order number */}
                 <div className="item-header has-text-right">#{orderID}</div>
                     <div className="item-img-container">
                         <div className="on-sale-label">On Sale!</div>
